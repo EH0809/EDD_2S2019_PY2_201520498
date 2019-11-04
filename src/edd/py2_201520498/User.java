@@ -5,12 +5,33 @@ package edd.py2_201520498;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author herre
  */
 public class User {
+
+    private int Id;
+    private String User;
+    private String Password;
+    private int Groove;
+    private String TimeUser;
+
+    public User(String User, String Password, String TimeUser) {
+        this.Id = toAscci(User);
+        this.User = User;
+        this.Password = Password;
+        this.TimeUser = TimeUser;
+    }
+
+    private static int toAscci(String palabra) {
+        int valor = 0;
+        for (int i = 0; i < palabra.length(); i++) {
+            char caracter = palabra.charAt(i);
+            valor += (int) caracter;
+        }//fin for
+        return valor;
+    }
 
     /**
      * @return the Id
@@ -25,27 +46,7 @@ public class User {
     public void setId(int Id) {
         this.Id = Id;
     }
-    private int Id;
-    private String User;
-    private String Password;
-    private int Groove;
-    private String TimeUser;
 
-    public User(String User, String Password, String TimeUser) {
-        this.Id = toAscci(User);
-        this.User = User;
-        this.Password = Password;
-        this.TimeUser = TimeUser;
-    }
-
-      private static int toAscci(String palabra) {
-        int valor = 0;
-        for (int i = 0; i < palabra.length(); i++) {
-            char caracter = palabra.charAt(i);
-            valor += (int) caracter;
-        }//fin for
-        return valor;
-    }
     /**
      * @return the User
      */
@@ -101,5 +102,5 @@ public class User {
     public void setTimeUser(String TimeUser) {
         this.TimeUser = TimeUser;
     }
-        
+
 }
