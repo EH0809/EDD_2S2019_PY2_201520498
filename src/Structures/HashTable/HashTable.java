@@ -5,8 +5,10 @@
  */
 package Structures.HashTable;
 
-
 import edd.py2_201520498.User;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
@@ -32,39 +34,40 @@ public class HashTable {
         }
         return true;
     }
-    
-    public void InsertHash2(User User){
+
+    public void InsertHash2(User User) {
         //int IndiceArreglo = User.getId()% getLengthHash();
         int IndiceArreglo = FHash(User.getId());
-        System.out.println("El indice es: "+ IndiceArreglo+ " Para el Elemento: "+ User.getUser());
-        while(getHashT()[IndiceArreglo] != null){
+        System.out.println("El indice es: " + IndiceArreglo + " Para el Elemento: " + User.getUser());
+        while (getHashT()[IndiceArreglo] != null) {
             IndiceArreglo++;
-            System.out.println("Ocurrio una colision en el Indice: "+ String.valueOf(IndiceArreglo-1));
-            IndiceArreglo %=getLengthHash();     
+            System.out.println("Ocurrio una colision en el Indice: " + String.valueOf(IndiceArreglo - 1));
+            IndiceArreglo %= getLengthHash();
         }
         getHashT()[IndiceArreglo] = User;
         User.setGroove(IndiceArreglo);
         setIntersectionsHash(getIntersectionsHash() + 1);
         VerificarCarga();
-        
-    
     }
 
+    public void V(User U){
+    
+    }
     public void InsertHash(User User) {
         int IndiceArreglo = FHash(User.getId());
-        System.out.println("Indice de Arreglo "+ IndiceArreglo +"  Para "+User.getUser());
+        System.out.println("Indice de Arreglo " + IndiceArreglo + "  Para " + User.getUser());
         int contador = 2;
         while (getHashT()[IndiceArreglo] != null) {
             IndiceArreglo = IndiceArreglo + (contador * contador);
-            System.out.println("Colicion se Cambio a indice: "+IndiceArreglo);
+            System.out.println("Colicion se Cambio a indice: " + IndiceArreglo);
             if (IndiceArreglo > getLengthHash()) {
-                IndiceArreglo = IndiceArreglo % getLengthHash();
-                System.out.println("Muy Grande el Indice Recalculando "+ IndiceArreglo);
+                IndiceArreglo %= getLengthHash();
+                System.out.println("Muy Grande el Indice Recalculando " + IndiceArreglo);
             }
             contador++;
         }
         getHashT()[IndiceArreglo] = User;
-        User.setGroove(IndiceArreglo-1);
+        User.setGroove(IndiceArreglo - 1);
         setIntersectionsHash(getIntersectionsHash() + 1);
         VerificarCarga();
     }
@@ -80,15 +83,15 @@ public class HashTable {
 
     private void ReHash() {
         User OldHash[] = getHashT();
-        int ant  = getLengthHash();
+        int ant = getLengthHash();
         setLengthHash(getLengthHash() * 2);
         setHashT(new User[getLengthHash()]);
         setIntersectionsHash(0);
         System.out.println("Se Rehash en marcha");
         for (int i = 0; i < OldHash.length; i++) {
             if (OldHash[i] != null) {
-                System.out.println("Insertando en Nueva Tabla" + OldHash[i].getUser());
-                InsertHash(OldHash[i]);
+                System.out.println("Insertando en Nueva Tabla " + OldHash[i].getUser());
+                InsertHash2(OldHash[i]);
             }
         }
     }
@@ -123,11 +126,11 @@ public class HashTable {
         String Cuadros = "";
         String Enlaces = "";
         String Labels = "";
-        String dot = "\nnodesep=.05; \nrankdir=LR; \nnode [shape=record,width=.1,height=.1];\n";
+        String dot = " digraph TableHash {\nnodesep=.05; \nrankdir=LR; \nnode [shape=record,width=.1,height=.1];\n";
         for (int i = 0; i < getHashT().length; i++) {
             Cuadros += "<f" + i + "> | ";
             if (getHashT()[i] != null) {
-                Labels += "node" + i + "[label=\"<n> " + getHashT()[i].getGroove() + " | " + getHashT()[i].getUser() + " | " + getHashT()[i].getPassword() + "|" + getHashT()[i].getTimeUser() + "\"];\n";
+                Labels += "node" + i + "[label=\"<n> Index: " + getHashT()[i].getGroove() + " | Name:" + getHashT()[i].getUser() + " | Password:" + getHashT()[i].getPassword() + "| Tiime:" + getHashT()[i].getTimeUser() + "\"];\n";
                 Enlaces += "tabla:f" + i + " -> node" + i + ":n;\n";
             }
         }
@@ -135,7 +138,35 @@ public class HashTable {
         dot += "node [width = 1.5];\n";
         dot += "\n" + Labels;
         dot += "\n" + Enlaces;
+        dot += "}";
         return dot;
+    }
+
+    public void Add() {
+        InsertHash2(new User("Edgar", "1", "asdf"));
+        InsertHash2(new User("Mario", "2", "asdf"));
+        InsertHash2(new User("Adriana", "3", "asdf"));
+        InsertHash2(new User("Sofia", "4", "asdf"));
+        InsertHash2(new User("Maria", "5", "asdf"));
+        InsertHash2(new User("Mariaaa", "6", "asdf"));
+        InsertHash2(new User("M", "7", "asdf"));
+        InsertHash2(new User("Mariad", "8", "asdf"));
+        SearchTable("Edgar", "1");
+    }
+
+    public boolean SearchTable(String User, String Password) {
+       // Add();
+        for (int i = 0; i < getHashT().length; i++) {
+            String U = getHashT()[i].getUser();
+            System.out.println(U);
+            String P = getHashT()[i].getPassword();
+            System.out.println(P);
+            if (U.equalsIgnoreCase(User) && P.equalsIgnoreCase(Password)) {
+                System.out.println("a");
+                 return true;
+            }
+        }
+        return false;
     }
 
     public void Imprimir() {
@@ -144,6 +175,37 @@ public class HashTable {
                 System.out.println("Ranura:" + getHashT()[i].getGroove() + " Name:" + getHashT()[i].getUser());
             }
         }
+    }
+
+    public void Graph() {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("TableHash.dot");
+            pw = new PrintWriter(fichero);
+            String Dot = "";
+            pw.println(Dot());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        try {
+            String cmd = "dot -Tjpg TableHash.dot -o TableHash.jpg";
+            Runtime.getRuntime().exec(cmd);
+            //String cmd2 = "TableHash.jpg"; 
+            //Runtime.getRuntime().exec(cmd2);
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
+
     }
 
     /**
