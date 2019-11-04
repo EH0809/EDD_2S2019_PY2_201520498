@@ -5,11 +5,14 @@
  */
 package edd.py2_201520498.Win;
 
+import edd.py2_201520498.Central;
+
 /**
  *
  * @author herre
  */
 public class ReportsWin extends javax.swing.JFrame {
+     Central Server = new Central();
 
     /**
      * Creates new form ReportsWin
@@ -38,6 +41,11 @@ public class ReportsWin extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Reports"));
 
         jButton1.setText("Hash Table");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Graph");
 
@@ -92,6 +100,12 @@ public class ReportsWin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void Hash(){
+        Server.GraphTable();
+    }
     /**
      * @param args the command line arguments
      */
