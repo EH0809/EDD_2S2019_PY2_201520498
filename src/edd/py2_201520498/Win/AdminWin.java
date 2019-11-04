@@ -5,11 +5,37 @@
  */
 package edd.py2_201520498.Win;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
+import Structures.HashTable.HashTable;
+import Structures.HashTable.HashTable2;
+import com.sun.jmx.snmp.Timestamp;
+import edd.py2_201520498.Central;
+import edd.py2_201520498.EDDPY2_201520498;
+import edd.py2_201520498.Sha256;
+import edd.py2_201520498.User;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author herre
  */
 public class AdminWin extends javax.swing.JFrame {
+    //Central Server = new Central();
+    EDDPY2_201520498 Server = new EDDPY2_201520498();
+    Sha256 En = new Sha256();
+  //  public static HashTable2 Table = new HashTable2(7);
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 
     /**
      * Creates new form AdminWin
@@ -42,6 +68,11 @@ public class AdminWin extends javax.swing.JFrame {
         jLabel1.setText("Bulk Load:");
 
         jButton1.setText("Load");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Exit");
 
@@ -112,6 +143,72 @@ public class AdminWin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            Bulk();
+            Buscar();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void Bulk() throws IOException {
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int returnValue = jfc.showOpenDialog(null);
+        String a = "";
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = jfc.getSelectedFile();
+            System.out.println(selectedFile.getAbsolutePath());
+            a = selectedFile.getAbsolutePath();
+            Read(a);
+
+        }
+
+    }
+
+    public void Read(String ruta) throws FileNotFoundException, IOException {
+        File file = new File(ruta);
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String st;
+        String a = "";
+        Scanner sc = new Scanner(file);
+        while ((st = br.readLine()) != null) {
+            a += st + "\n";
+        }
+        //System.out.println(a);
+        CompletarRead(a);
+    }
+
+    public void CompletarRead(String archivo) {
+        String[] fila = archivo.split("\n");
+        String[] Pi;
+        String Usuario, Pass;
+        for (int i = 0; i < fila.length; i++) {
+            Pi = fila[i].split(";");
+            Usuario = Pi[0];
+            Pass = Pi[1];
+            if (!Usuario.equalsIgnoreCase("Usuario") && !Pass.equalsIgnoreCase("Password")) {
+                Server.EnviarHas(Usuario, Pass, Time());
+                System.out.println("Usuario:" +Usuario +" Password:"+Pass+" Pass Encriptado:"+Encriptacion(Pass));
+            }
+        }
+        
+        Server.GraphTable();
+    }
+    public String Encriptacion(String Pass){
+        return En.SHa(Pass);
+    }
+    public void Buscar() {
+       // Table.Bus("Juan123");
+    }
+
+    public String Time() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String a = dateFormat.format(new Date());
+        return a;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -126,16 +223,24 @@ public class AdminWin extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminWin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminWin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminWin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminWin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
