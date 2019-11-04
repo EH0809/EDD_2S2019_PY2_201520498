@@ -5,12 +5,19 @@
  */
 package edd.py2_201520498.Win;
 
+import edd.py2_201520498.Central;
+import edd.py2_201520498.EDDPY2_201520498;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author herre
  */
 public class Create_User extends javax.swing.JFrame {
-
+    //AdminWin Admin = new AdminWin();
+    EDDPY2_201520498 Server = new EDDPY2_201520498();
     /**
      * Creates new form Create_User
      */
@@ -48,6 +55,11 @@ public class Create_User extends javax.swing.JFrame {
         jButton1.setText("Cancel");
 
         jButton2.setText("OK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,6 +120,28 @@ public class Create_User extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Verificar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void Verificar(){
+    String Name = NameNewUser.getText();
+    String Pass = PasswordNewUser.getText();
+    
+    if (Pass.length() >= 8){
+        Server.AddNewUser(Name, Pass, Time());
+    }else{
+        JOptionPane.showMessageDialog(null, "Contraseña Invalida Mayor a 8 Caracteres");
+    }
+    Server.GraphTable();
+    }
+    public String Time() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String a = dateFormat.format(new Date());
+        return a;
+    }
+    
     /**
      * @param args the command line arguments
      */
