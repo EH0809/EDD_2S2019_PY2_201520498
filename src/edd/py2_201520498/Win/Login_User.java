@@ -5,11 +5,18 @@
  */
 package edd.py2_201520498.Win;
 
+import Structures.HashTable.HashTable;
+import edd.py2_201520498.User;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author herre
  */
 public class Login_User extends javax.swing.JFrame {
+
+    HashTable THash;
+    MainWin Main;
 
     /**
      * Creates new form Login_User
@@ -31,9 +38,9 @@ public class Login_User extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         LoginUser = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        PasswordUser = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        PasswordUser = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,6 +55,13 @@ public class Login_User extends javax.swing.JFrame {
         jButton1.setText("Cancel ");
 
         jButton2.setText("Login");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        PasswordUser.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,9 +79,9 @@ public class Login_User extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoginUser, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(LoginUser, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(PasswordUser))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -77,10 +91,12 @@ public class Login_User extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LoginUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PasswordUser, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(PasswordUser, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                        .addGap(3, 3, 3)))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,6 +119,45 @@ public class Login_User extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+       // AddTalbe();
+        SearchTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void AddTalbe(){
+        THash.InsertHash2(new User("Edgar", "1", "asdf"));
+        THash.InsertHash2(new User("Mario", "2", "asdf"));
+        THash.InsertHash2(new User("Adriana", "3", "asdf"));
+        THash.InsertHash2(new User("Sofia", "4", "asdf"));
+        THash.InsertHash2(new User("Maria", "5", "asdf"));
+        THash.InsertHash2(new User("Mariaaa", "6", "asdf"));
+        THash.InsertHash2(new User("M", "7", "asdf"));
+        THash.InsertHash2(new User("Mariad", "8", "asdf")); 
+    
+    }
+    
+    public void SearchTable() {
+        String User = LoginUser.getText();
+        String Pass = PasswordUser.getText();
+        if (User.equalsIgnoreCase("Admin") && Pass.equalsIgnoreCase("Admin")){
+            AdminWin a = new AdminWin();
+            a.setVisible(true);
+            
+            this.setVisible(false);
+            
+        }
+        System.out.println("User:"+User);
+        System.out.println("Pass:"+Pass);
+        boolean Ver = false; //THash.SearchTable(User, Pass);
+        if (Ver == true) {
+            Main.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password");
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -141,7 +196,7 @@ public class Login_User extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField LoginUser;
-    private javax.swing.JTextField PasswordUser;
+    private javax.swing.JPasswordField PasswordUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
