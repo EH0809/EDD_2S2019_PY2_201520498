@@ -15,9 +15,24 @@ import java.text.SimpleDateFormat;
  */
 public class NodeAVL {
 
+    /**
+     * @return the Clave
+     */
+    public int getClave() {
+        return Clave;
+    }
+
+    /**
+     * @param Clave the Clave to set
+     */
+    public void setClave(int Clave) {
+        this.Clave = Clave;
+    }
+
     private int Id;
     private int Height;
     private int FE;
+    private int Clave;
     private String Name;
     private String Description;
     private String TimeStamp;
@@ -26,8 +41,9 @@ public class NodeAVL {
     private NodeAVL Parent;
     //public Usuarios Usuario;
 
-    public NodeAVL(String Name, String Description) {
+    public NodeAVL(String Name, String Description,int Clave) {
         this.Id = toAscci(Name);
+        this.Clave = Clave;
         this.Height = 1;
         this.FE = 0;
         this.Name = Name;
