@@ -124,21 +124,31 @@ public class HashTable2 {
         setInsersiones(getInsersiones() + 1);
         VerficarCarga();
     }
-    
-    public void VerificardorPass(User User){
-        if (VerPass(User.getPassword())){
+
+    public void VerificardorPass(User User) {
+        if (VerPass(User.getPassword())) {
             InsertarUser(User);
-        }else{
+            System.out.println("Usuario ya ingresado");
+        } else {
             System.out.println("La Contraseña es menos de 8 caracteres");
         }
-        
+
     }
-    public boolean VerPass(String Pass){
-        if (Pass.length() >= 8){
+
+    public boolean VerPass(String Pass) {
+        if (Pass.length() >= 8) {
             return true;
         }
         return false;
-    
+
+    }
+
+    public boolean VerrUs(String Us) {
+        User Aux = BuscarUser(Us);
+        if (Aux.getUser().equalsIgnoreCase(Us)) {
+            return true;
+        }
+        return false;
     }
 
     private void VerficarCarga() {
@@ -152,7 +162,10 @@ public class HashTable2 {
 
     private void ReHash() {
         User New_Table[] = getTableHash();
-        setTamanio(getTamanio() * 2);
+        //setTamanio(getTamanio() * 2);
+        int a = VerPrimo(getTamanio());
+        setTamanio(a);
+        System.out.println("Valor de la Nueva Tabla "+ getTamanio());
         setTableHash(new User[getTamanio()]);
         setInsersiones(0);
         for (int i = 0; i < New_Table.length; i++) {
@@ -160,6 +173,33 @@ public class HashTable2 {
                 InsertarUser(New_Table[i]);
             }
         }
+    }
+
+    public int VerPrimo(int Tamanio) {
+        int Limite = Tamanio * 2;
+        int i = 0;
+        for (i = Tamanio + 1; i < Limite; i++) {
+            if (NextPrimo(i)) {
+                System.out.println("Numero Siguiente Primo " + i);
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private boolean NextPrimo(int Tamanio) {
+        int contador = 0;
+        boolean Aux = false;
+        for (int I = 1; I <= Tamanio; I++) {
+            if ((Tamanio % I) == 0) {
+                contador++;
+            }
+        }
+        if (contador == 2) {
+            Aux = true;
+           
+        }
+        return Aux;
     }
 
     private int hash(long Id) {
@@ -199,7 +239,7 @@ public class HashTable2 {
     public void Bus(String Name) {
         User B = BuscarUser(Name);
         if (B == null) {
-            System.out.println("No se Encuentra "+ Name);
+            System.out.println("No se Encuentra " + Name);
         } else {
             System.out.println("Si se Encuentra " + B.getUser());
         }
