@@ -20,9 +20,9 @@ public class AVL {
         return Node.getHeight();
     }
 
-    int max(int a, int b) {
-        return (a > b) ? a : b;
-    }
+        int max(int a, int b) {
+            return (a > b) ? a : b;
+        }
 
     public NodeAVL RotateRight(NodeAVL Node) {
         NodeAVL Aux = Node.getSonLeft();
@@ -71,9 +71,10 @@ public class AVL {
     }
 
     NodeAVL InsertNode(NodeAVL Root, String Name, String Description) {
-        int Id = toAscci(Name);
+        //int Id = toAscci(Name);
+        int Id = Integer.parseInt(Name);
         if (Root == null) {
-            return (new NodeAVL(Name, Description));
+            return (new NodeAVL(Name, Description,1));
         }
         if (Id < Root.getId()) {
             Root.setSonLeft(InsertNode(Root.getSonLeft(), Name, Description));
