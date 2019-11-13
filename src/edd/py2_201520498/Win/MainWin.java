@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package edd.py2_201520498.Win;
+import edd.py2_201520498.EDDPY2_201520498;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,11 +13,18 @@ package edd.py2_201520498.Win;
  */
 public class MainWin extends javax.swing.JFrame {
 
+    Login_User Login = new Login_User();
+    EDDPY2_201520498 Server = new EDDPY2_201520498();
+    String Usuario = Login.Nombre;
+    String NombreC ;
+
+
     /**
      * Creates new form MainWin
      */
     public MainWin() {
         initComponents();
+        NameUser.setText(Usuario);
     }
 
     /**
@@ -38,14 +47,19 @@ public class MainWin extends javax.swing.JFrame {
         DeleteArchive = new javax.swing.JButton();
         ShareArchive = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        NameUser = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Folders"));
 
         CreateFolders.setText("Create");
+        CreateFolders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateFoldersActionPerformed(evt);
+            }
+        });
 
         ModifyFolders.setText("Modify");
 
@@ -117,9 +131,7 @@ public class MainWin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("USAC FILE DRIVE:");
-
-        jLabel2.setText("USUARIO");
+        jLabel1.setText("USAC FILE DRIVE");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("DRIVE"));
 
@@ -127,12 +139,15 @@ public class MainWin extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        NameUser.setEditable(false);
+        NameUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,9 +162,9 @@ public class MainWin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(55, 55, 55))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,7 +182,7 @@ public class MainWin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -176,6 +191,21 @@ public class MainWin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void CreateFoldersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateFoldersActionPerformed
+        // TODO add your handling code here:
+        NombreC=JOptionPane.showInputDialog("Ingresar Nombre Carpeta");
+        CrearCarpeta();
+    }//GEN-LAST:event_CreateFoldersActionPerformed
+
+    public void CrearCarpeta(){
+        if (Server.AgregarCarpetaNueva(Usuario, NombreC)){
+            System.out.println("Si se Ingreso la Carpeta");
+        }else{
+            System.out.println("No se ingreso la carpeta");
+        }
+        
+    
+    }
     /**
      * @param args the command line arguments
      */
@@ -210,6 +240,8 @@ public class MainWin extends javax.swing.JFrame {
             }
         });
     }
+    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateArchive;
@@ -218,10 +250,10 @@ public class MainWin extends javax.swing.JFrame {
     private javax.swing.JButton DeleteFolders;
     private javax.swing.JButton ModifyArchive;
     private javax.swing.JButton ModifyFolders;
+    private javax.swing.JTextField NameUser;
     private javax.swing.JButton ShareArchive;
     private javax.swing.JButton ShareFolders;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
