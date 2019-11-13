@@ -16,8 +16,11 @@ import javax.swing.JOptionPane;
  * @author herre
  */
 public class Create_User extends javax.swing.JFrame {
+
     //AdminWin Admin = new AdminWin();
     EDDPY2_201520498 Server = new EDDPY2_201520498();
+    Login_User Login = new Login_User();
+
     /**
      * Creates new form Create_User
      */
@@ -53,6 +56,11 @@ public class Create_User extends javax.swing.JFrame {
         jLabel2.setText("Password:");
 
         jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -125,23 +133,36 @@ public class Create_User extends javax.swing.JFrame {
         Verificar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void Verificar(){
-    String Name = NameNewUser.getText();
-    String Pass = PasswordNewUser.getText();
-    
-    if (Pass.length() >= 8){
-        Server.AddNewUser(Name, Pass, Time());
-    }else{
-        JOptionPane.showMessageDialog(null, "Contraseña Invalida Mayor a 8 Caracteres");
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Retornar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void Retornar() {
+        Login.setVisible(true);
+        this.setVisible(false);
     }
-    Server.GraphTable();
+
+    public void Verificar() {
+        String Name = NameNewUser.getText();
+        String Pass = PasswordNewUser.getText();
+        if (Server.AgregarNuevoUsuario(Name, Pass, Time())) {
+            JOptionPane.showMessageDialog(null, "Usuario Agregado");
+            Login.setVisible(true);
+            this.setVisible(false);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password");
+        }
+
     }
+
     public String Time() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String a = dateFormat.format(new Date());
         return a;
     }
-    
+
     /**
      * @param args the command line arguments
      */
