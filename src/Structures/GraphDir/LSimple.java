@@ -11,101 +11,176 @@ package Structures.GraphDir;
  */
 public class LSimple {
 
-    private NodeLS FirstList;
-    private int Lengh;
+    private NodeLS FirtsList;
+    private NodeLS EndList;
+    private String Name;
+    private int Contador;
+    private LSimple SiguienteLista;
 
     public LSimple() {
-        this.FirstList = null;
-        this.Lengh = 0;
+        this.FirtsList = null;
+        this.EndList = null;
     }
 
-    public boolean IsEmpy() {
-        return FirstList == null;
+    public boolean isEmpty() {
+        return getFirtsList() == null;
     }
 
-    public int GetLengh() {
-        return Lengh;
-    }
-
-    public void AddList(String Name) {
-        NodeLS New_Node = new NodeLS();
-        New_Node.setNameDir(Name);
-        if (IsEmpy()) {
-            FirstList = New_Node;
+    public void InsertarNodeoListaS(String Name) {
+        NodeLS nuevo = crearNodo(Name);
+        if (isEmpty()) {
+            setFirtsList(nuevo);
+            setEndList(nuevo);
         } else {
-            NodeLS Aux = FirstList;
-            while (Aux.getNextNode() != null) {
+            getEndList().setNextNode(nuevo);
+            setEndList(nuevo);
+        }
+        setContador(getContador() + 1);
+    }
+
+    public NodeLS crearNodo(String Name) {
+        return new NodeLS(Name, getContador());
+    }
+
+    public NodeLS BuscarCarpetas(String Name) {
+        NodeLS Aux = getFirtsList();
+        if (Aux != null) {
+            while (Aux != null) {
+                if (Aux.getNameDir().equalsIgnoreCase(Name)) {
+                    return Aux;
+                }
+            }
+        } else {
+            System.out.println("No se Encontro Dentro de la Lista de Listas");
+        }
+
+        return null;
+
+    }
+
+    public boolean Buscar(String Name) {
+        NodeLS Aux = getFirtsList();
+        if (Aux != null) {
+            while (Aux != null) {
+                if (Aux.getNameDir().equalsIgnoreCase(Name)) {
+                    return true;
+                }
                 Aux = Aux.getNextNode();
             }
-            Aux.setNextNode(New_Node);
+        } else {
+            System.out.println("No se Encontro Dentro de la Lista de Listas");
         }
-        Lengh++;
+
+        return false;
     }
-    
-    public void AddReference(String PDir, String Dir){
-        NodeLS New_Node = new NodeLS();
-        New_Node.setNameDir(Dir);
-        if (!IsEmpy()){
-            if (SearhNode(PDir)){
-                NodeLS Temp = FirstList;
-                while(!Temp.getNameDir().equalsIgnoreCase(PDir)){
-                    Temp = Temp.getNextNode();
+
+    public NodeLS remover(String Name) {
+        NodeLS retirado = null;
+        NodeLS actual = getFirtsList();
+        if (actual.getNameDir() == Name) {
+            retirado = actual;
+            setFirtsList(getFirtsList().getNextNode());
+        } else {
+            while (actual.getNextNode() != null) {
+                if (actual.getNextNode().getNameDir() == Name) {
+                    retirado = actual.getNextNode();
+                    actual.setNextNode(retirado.getNextNode());
+                    break;
                 }
-                NodeLS Aux = Temp.getNextNode();
-                Temp.setNextNode(New_Node);
-                New_Node.setNextNode(Aux);
-                Lengh++; 
+                actual = actual.getNextNode();
             }
+        }
+        return retirado;
+    }
+
+    public void Imprimir() {
+        NodeLS Aux = getFirtsList();
+        while (Aux != null) {
+            System.out.println("Nombre Carpeta:" + Aux.getNameDir());
+            Aux = Aux.getNextNode();
         }
     }
 
-    public boolean SearhNode(String Aux) {
-        NodeLS Temp = FirstList;
-        boolean Encontrado = false;
-        while (Temp != null && Encontrado != true) {
-            if (Temp.getNameDir().equalsIgnoreCase(Aux)) {
-                Encontrado = true;
-            }
-            Temp = Temp.getNextNode();
-        }
-        return Encontrado;
-    }
-    
-    public void ModifyNode(String New_Dir, String Old_Dir){
-        if(SearhNode(Old_Dir)){
-            NodeLS Temp = FirstList;
-            while(Temp.getNameDir().equalsIgnoreCase(Old_Dir)){
-                Temp = Temp.getNextNode();
-            }
-            Temp.setNameDir(New_Dir);
-        }
-    }
-    
-    public void DeleteNode(String Dir){
-        
-        if(SearhNode(Dir)){
-            if (FirstList.getNameDir().equalsIgnoreCase(Dir)){
-                FirstList = FirstList.getNextNode();
-            }else{
-                NodeLS Aux = FirstList;
-                while(Aux.getNextNode().getNameDir() != Dir){
-                    Aux = Aux.getNextNode();
-                }
-                NodeLS Aux2 = Aux.getNextNode().getNextNode();
-                Aux.setNextNode(Aux2);
-            }
-        }
-        Lengh--;
-        
+    public String getDot() {
+        String dot = "\nnode [shape=record];\n";
+        NodeLS actual = getFirtsList();
+        while (actual != null) {
+            dot += "node" + actual.getNameDir() + "[label=\"" + actual.getNameDir() + "\"];\n";
+            if (actual.getNextNode() != null) {
+                dot += "node" + actual.getNameDir() + " -> node" + actual.getNextNode().getNameDir() + ";\n";
+            }//fin if
+            actual = actual.getNextNode();
+        }//fin while
+        return dot;
     }
 
-    public void Mostar(){
-        if (!IsEmpy()){
-            NodeLS Temp = FirstList;
-            while(Temp != null){
-                System.out.println("[ " + Temp.getNameDir() + " ]" + " ->  ");
-                Temp = Temp.getNextNode();
-            }
-        }
+    /**
+     * @return the FirtsList
+     */
+    public NodeLS getFirtsList() {
+        return FirtsList;
+    }
+
+    /**
+     * @param FirtsList the FirtsList to set
+     */
+    public void setFirtsList(NodeLS FirtsList) {
+        this.FirtsList = FirtsList;
+    }
+
+    /**
+     * @return the EndList
+     */
+    public NodeLS getEndList() {
+        return EndList;
+    }
+
+    /**
+     * @param EndList the EndList to set
+     */
+    public void setEndList(NodeLS EndList) {
+        this.EndList = EndList;
+    }
+
+    /**
+     * @return the Contador
+     */
+    public int getContador() {
+        return Contador;
+    }
+
+    /**
+     * @param Contador the Contador to set
+     */
+    public void setContador(int Contador) {
+        this.Contador = Contador;
+    }
+
+    /**
+     * @return the Name
+     */
+    public String getName() {
+        return Name;
+    }
+
+    /**
+     * @param Name the Name to set
+     */
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    /**
+     * @return the SiguienteLista
+     */
+    public LSimple getSiguienteLista() {
+        return SiguienteLista;
+    }
+
+    /**
+     * @param SiguienteLista the SiguienteLista to set
+     */
+    public void setSiguienteLista(LSimple SiguienteLista) {
+        this.SiguienteLista = SiguienteLista;
     }
 }
