@@ -5,6 +5,7 @@
  */
 package Structures.GraphDir;
 import Structures.AVL.AVL;
+import Structures.Matrix.Matrix;
 
 /**
  *
@@ -14,11 +15,13 @@ public class NodeLS {
     private String NameDir;
     private int NForders;
     private NodeLS NextNode;
-    //AVL PAVL;
+    private Matrix MatrixDeUsuario;
 
-    public NodeLS() {
-        this.NameDir = "";
+    public NodeLS(String Name, int NFolders) {
+        this.NameDir = Name;
         this.NextNode = null;
+        this.NForders = NFolders;
+        this.MatrixDeUsuario = new Matrix();
     }
 
     /**
