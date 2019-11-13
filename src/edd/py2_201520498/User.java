@@ -1,5 +1,8 @@
 package edd.py2_201520498;
 
+import edd.py2_201520498.Sha256;
+import Structures.GraphDir.LSimple;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,17 +14,27 @@ package edd.py2_201520498;
  */
 public class User {
 
+    private Sha256 En;
     private int Id;
     private String User;
     private String Password;
+    private String PasswordSha;
     private int Groove;
     private String TimeUser;
+    private LSimple GrafoDirigido;
 
     public User(String User, String Password, String TimeUser) {
         this.Id = toAscci(User);
         this.User = User;
+        this.PasswordSha = Encriptacion(Password);
         this.Password = Password;
         this.TimeUser = TimeUser;
+        //this.GrafoDirigido = new LSimple(User);
+    }
+
+    private String Encriptacion(String Pass) {
+        En = new Sha256();
+        return En.SHa(Pass);
     }
 
     private static int toAscci(String palabra) {
@@ -101,6 +114,34 @@ public class User {
      */
     public void setTimeUser(String TimeUser) {
         this.TimeUser = TimeUser;
+    }
+
+    /**
+     * @return the PasswordSha
+     */
+    public String getPasswordSha() {
+        return PasswordSha;
+    }
+
+    /**
+     * @param PasswordSha the PasswordSha to set
+     */
+    public void setPasswordSha(String PasswordSha) {
+        this.PasswordSha = PasswordSha;
+    }
+
+    /**
+     * @return the GrafoDirigido
+     */
+    public LSimple getGrafoDirigido() {
+        return GrafoDirigido;
+    }
+
+    /**
+     * @param GrafoDirigido the GrafoDirigido to set
+     */
+    public void setGrafoDirigido(LSimple GrafoDirigido) {
+        this.GrafoDirigido = GrafoDirigido;
     }
 
 }
