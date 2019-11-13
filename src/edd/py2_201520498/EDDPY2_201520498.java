@@ -20,6 +20,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import edd.py2_201520498.Win.Login_User;
+import Structures.GraphDir.LLSimple;
+import edd.py2_201520498.Win.VentanaPrincipal;
 
 /**
  *
@@ -33,14 +36,48 @@ public class EDDPY2_201520498 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        
-        // TODO code application logic here
-        //AdminWin a = new AdminWin();
+        //Login_User a = new Login_User();
         //a.setVisible(true);
-        //aVLL();
-        //Hash2();
-       // ab();
+        //VentanaPrincipal vp = new VentanaPrincipal();
+        AgregarCarpetaEnCarpeta();
+    }
 
+    public boolean Buscar(String Name, String Pass) {
+        if (Table.LoginUser(Name, Pass)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean AgregarNuevoUsuario(String Name, String Pass, String Time) {
+        if (Table.VerificardorPass(new User(Name, Pass, Time))) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean AgregarCarpetaNueva(String Name, String NombreCarpeta) {
+        if (Table.AgregarCarpeta(Name, NombreCarpeta)) {
+            Table.ImprimirCarpetas(Name);
+            return true;
+        }
+        return false;
+    }
+
+    public static void AgregarCarpetaEnCarpeta() {
+        LLSimple Lista = new LLSimple();
+        Lista.AgregarLista("Documentos");
+        Lista.AgregarDentrodeLista("Documentos", "Musica");
+        Lista.AgregarDentrodeLista("Musica", "Metallica");
+        Lista.AgregarLista("Proyectos");
+        Lista.AgregarDentrodeLista("Proyectos", "EDD");
+        Lista.AgregarDentrodeLista("Metallica", "Fade to black");
+        Lista.AgregarDentrodeLista("EDD", "P1");
+        Lista.Imprimir();
+        System.out.println("Despues");
+        Lista.EliminarDentrodeCarpetas("Documentos","Musica");
+        Lista.Imprimir();
+       
     }
 
     public static void aVLL() {
@@ -48,71 +85,20 @@ public class EDDPY2_201520498 {
         a.InsertarArchivo("Hola.txt", "CarePija");
         a.InsertarArchivo("Carro.h", "CarePija");
         a.InsertarArchivo("Carro.cpp", "CarePija");
-        a.InsertarArchivo("Hijuputaa.exe", "CarePija");
-        a.InsertarArchivo("Mecago.txt", "CarePija");
-        a.InsertarArchivo("Maricon.mp3", "CarePija");
+        a.InsertarArchivo("Nose.exe", "CarePija");
+        a.InsertarArchivo("Mec.txt", "CarePija");
+        a.InsertarArchivo("Mari.mp3", "CarePija");
         a.InsertarArchivo("Al.txt", "CarePija");
         a.InOrder();
         //a.ModificarNombre("Maricon.mp3","NuevoMaricon.mp3");
         //a.InOrder();
-        a.EliminarArchivos("Mecago.txt");
-        a.InOrder();
-        // a.SentGraphAVL();
+        // a.EliminarArchivos("Mecago.txt");
+        // a.InOrder();
+        a.SentGraphAVL();
 
     }
 
-    public static void Hash2() {
-       /*
-         HashTable2 T = new HashTable2(7);
-        T.VerificardorPass(new User("Edgar", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("Mario", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("Galindo", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("Rojo", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("Creama", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("a", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("b", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("c", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("d", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("e", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("f", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("g", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("h", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("i", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("j", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("k", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("l", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("g", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("h", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("i", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("j", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("k", "12345asdfasdfasd", "a"));
-        T.VerificardorPass(new User("l", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("m", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("n", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("ñ", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("o", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("p", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("q", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("r", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("s", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("t", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("u", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("v", "12345asdfasdfasd", "12345678"));
-        T.VerificardorPass(new User("t", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("u", "12345asdfasdfasd", "12345"));
-        T.VerificardorPass(new User("v", "12345asdfasdfasd", "12345678"));
-        T.Imprimir();
-*/
-    }
-
-    public static void Graphdir() {
-        LSimple L = new LSimple();
-        L.AddList("/");
-        L.AddList("Documentos");
-        L.AddList("Musica");
-        L.AddList("Edgar");
-        L.AddReference("/", "LALA");
-        L.Mostar();
+    public void Graphdir() {
 
     }
 
@@ -132,20 +118,19 @@ public class EDDPY2_201520498 {
     }
 
     public void GraphTable() {
-        this.Table.Imprimir();
         this.Table.Graph();
     }
 
     public void AddNewUser(String Name, String Pass, String Time) {
         this.Table.VerificardorPass(new User(Name, Pass, Time));
-        this.Table.Graph();
     }
 
-    public static void ab () throws IOException{
+    public static void ab() throws IOException {
         Read();
     }
+
     public static void Read() throws FileNotFoundException, IOException {
-        
+
         File file = new File("C:\\Users\\herre\\OneDrive\\Documentos\\NetBeansProjects\\EDD 2S 2019\\[EDD]PY2_201520498\\Carga.csv");
         BufferedReader br = new BufferedReader(new FileReader(file));
         String st;
@@ -168,10 +153,9 @@ public class EDDPY2_201520498 {
             Pass = Pi[1];
             if (!Usuario.equalsIgnoreCase("Usuario") && !Pass.equalsIgnoreCase("Password")) {
                 Table.InsertarUser(new User(Usuario, Pass, "0"));
-                System.out.println("Usuario:" +Usuario);
+                System.out.println("Usuario:" + Usuario);
             }
         }
-        
-      
+
     }
 }
