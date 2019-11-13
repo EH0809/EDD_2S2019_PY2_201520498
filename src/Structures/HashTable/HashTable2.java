@@ -16,48 +16,6 @@ import java.io.PrintWriter;
  */
 public class HashTable2 {
 
-    /**
-     * @return the TableHash
-     */
-    public User[] getTableHash() {
-        return TableHash;
-    }
-
-    /**
-     * @param TableHash the TableHash to set
-     */
-    public void setTableHash(User[] TableHash) {
-        this.TableHash = TableHash;
-    }
-
-    /**
-     * @return the Tamanio
-     */
-    public int getTamanio() {
-        return Tamanio;
-    }
-
-    /**
-     * @param Tamanio the Tamanio to set
-     */
-    public void setTamanio(int Tamanio) {
-        this.Tamanio = Tamanio;
-    }
-
-    /**
-     * @return the Insersiones
-     */
-    public int getInsersiones() {
-        return Insersiones;
-    }
-
-    /**
-     * @param Insersiones the Insersiones to set
-     */
-    public void setInsersiones(int Insersiones) {
-        this.Insersiones = Insersiones;
-    }
-
     private User TableHash[];
     private int Tamanio;
     private int Insersiones;
@@ -86,6 +44,17 @@ public class HashTable2 {
             }
         }
         return null;
+    }
+
+    public boolean LoginUser(String Name, String Pass) {
+        for (int i = 0; i < getTableHash().length; i++) {
+            if (getTableHash()[i] != null) {
+                if (getTableHash()[i].getUser().equals(Name) && getTableHash()[i].getPasswordSha().equals(Pass)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean EliminarUser(User User) {
@@ -125,14 +94,26 @@ public class HashTable2 {
         VerficarCarga();
     }
 
-    public void VerificardorPass(User User) {
-        if (VerPass(User.getPassword())) {
-            InsertarUser(User);
-            System.out.println("Usuario ya ingresado");
-        } else {
-            System.out.println("La Contraseña es menos de 8 caracteres");
+    public boolean VerificarUsuario(String Name) {
+        for (int i = 0; i < getTableHash().length; i++) {
+            if (getTableHash()[i] != null) {
+                if (getTableHash()[i].getUser().equals(Name)) {
+                    return true;
+                }
+            }
         }
+        return false;
 
+    }
+
+    public boolean VerificardorPass(User User) {
+        if (!VerificarUsuario(User.getUser()) && VerPass(User.getPassword())) {
+            InsertarUser(User);
+            return true;
+        } else {
+            System.out.println("La Contraseña es menos de 8 caracteres o usuario ya ingresado:" + User.getUser());
+        }
+        return false;
     }
 
     public boolean VerPass(String Pass) {
@@ -145,7 +126,7 @@ public class HashTable2 {
 
     public boolean VerrUs(String Us) {
         User Aux = BuscarUser(Us);
-        if (Aux.getUser().equalsIgnoreCase(Us)) {
+        if (Aux.getUser().equals(Us)) {
             return true;
         }
         return false;
@@ -165,7 +146,7 @@ public class HashTable2 {
         //setTamanio(getTamanio() * 2);
         int a = VerPrimo(getTamanio());
         setTamanio(a);
-        System.out.println("Valor de la Nueva Tabla "+ getTamanio());
+        System.out.println("Valor de la Nueva Tabla " + getTamanio());
         setTableHash(new User[getTamanio()]);
         setInsersiones(0);
         for (int i = 0; i < New_Table.length; i++) {
@@ -197,7 +178,7 @@ public class HashTable2 {
         }
         if (contador == 2) {
             Aux = true;
-           
+
         }
         return Aux;
     }
@@ -294,6 +275,69 @@ public class HashTable2 {
         dot += "\n" + Enlaces;
         dot += "}";
         return dot;
+    }
+
+    public boolean AgregarCarpeta(String Name, String NombreCarpeta) {
+        System.out.println("Se va a buscar"+ Name);
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+//            Usuario.getGrafoDirigido().InsertarNodeoListaS(Usuario.getGrafoDirigido().crearNodo(NombreCarpeta));
+            return true;
+        }else{
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public void ImprimirCarpetas(String Name) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().Imprimir();
+        }else{
+            System.out.println("No se Encontro usuario");
+        }
+    }
+
+    /**
+     * @return the TableHash
+     */
+    public User[] getTableHash() {
+        return TableHash;
+    }
+
+    /**
+     * @param TableHash the TableHash to set
+     */
+    public void setTableHash(User[] TableHash) {
+        this.TableHash = TableHash;
+    }
+
+    /**
+     * @return the Tamanio
+     */
+    public int getTamanio() {
+        return Tamanio;
+    }
+
+    /**
+     * @param Tamanio the Tamanio to set
+     */
+    public void setTamanio(int Tamanio) {
+        this.Tamanio = Tamanio;
+    }
+
+    /**
+     * @return the Insersiones
+     */
+    public int getInsersiones() {
+        return Insersiones;
+    }
+
+    /**
+     * @param Insersiones the Insersiones to set
+     */
+    public void setInsersiones(int Insersiones) {
+        this.Insersiones = Insersiones;
     }
 
 }
