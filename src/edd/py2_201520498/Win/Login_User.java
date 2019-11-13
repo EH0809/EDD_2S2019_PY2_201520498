@@ -8,6 +8,8 @@ package edd.py2_201520498.Win;
 import Structures.HashTable.HashTable;
 import edd.py2_201520498.User;
 import javax.swing.JOptionPane;
+import edd.py2_201520498.EDDPY2_201520498;
+import edd.py2_201520498.Sha256;
 
 /**
  *
@@ -15,8 +17,10 @@ import javax.swing.JOptionPane;
  */
 public class Login_User extends javax.swing.JFrame {
 
-    HashTable THash;
-    MainWin Main;
+    EDDPY2_201520498 Principal = new EDDPY2_201520498();
+    Sha256 sha = new Sha256();
+    public static String Nombre;
+    public static String Contraseña;
 
     /**
      * Creates new form Login_User
@@ -41,6 +45,7 @@ public class Login_User extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         PasswordUser = new javax.swing.JPasswordField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,28 +66,37 @@ public class Login_User extends javax.swing.JFrame {
             }
         });
 
-        PasswordUser.setText("jPasswordField1");
+        PasswordUser.setText("hola");
+
+        jButton3.setText("Nuevo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LoginUser, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(PasswordUser))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LoginUser)
+                            .addComponent(PasswordUser, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,19 +112,19 @@ public class Login_User extends javax.swing.JFrame {
                         .addComponent(PasswordUser, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                         .addGap(3, 3, 3)))
                 .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,41 +136,46 @@ public class Login_User extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       // AddTalbe();
+        // AddTalbe();
         SearchTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void AddTalbe(){
-        THash.InsertHash2(new User("Edgar", "1", "asdf"));
-        THash.InsertHash2(new User("Mario", "2", "asdf"));
-        THash.InsertHash2(new User("Adriana", "3", "asdf"));
-        THash.InsertHash2(new User("Sofia", "4", "asdf"));
-        THash.InsertHash2(new User("Maria", "5", "asdf"));
-        THash.InsertHash2(new User("Mariaaa", "6", "asdf"));
-        THash.InsertHash2(new User("M", "7", "asdf"));
-        THash.InsertHash2(new User("Mariad", "8", "asdf")); 
-    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Nuevo();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    public void Nuevo() {
+        Create_User NewUser = new Create_User();
+        NewUser.setVisible(true);
+        this.setVisible(false);
     }
-    
+
+    public String ConvertirelPassword(String Pass) {
+        return sha.SHa(Pass);
+    }
+
     public void SearchTable() {
         String User = LoginUser.getText();
         String Pass = PasswordUser.getText();
-        if (User.equalsIgnoreCase("Admin") && Pass.equalsIgnoreCase("Admin")){
+        if (User.equalsIgnoreCase("Admin") && Pass.equalsIgnoreCase("Admin")) {
             AdminWin a = new AdminWin();
             a.setVisible(true);
-            
             this.setVisible(false);
-            
-        }
-        System.out.println("User:"+User);
-        System.out.println("Pass:"+Pass);
-        boolean Ver = false; //THash.SearchTable(User, Pass);
-        if (Ver == true) {
-            Main.setVisible(true);
+
+        } else if (Principal.Buscar(User, ConvertirelPassword(Pass))) {
+            Nombre = User;
+            Contraseña = Pass;
+            System.out.println("Usera:" + Nombre);
+            System.out.println("Pass:" + Contraseña);
+            MainWin ventanaPrincipal = new MainWin();
+            ventanaPrincipal.setVisible(true);
+           // Principal.GraphTable();
+            this.setVisible(false);
+
         } else {
             JOptionPane.showMessageDialog(null, "Invalid username or password");
         }
-
     }
 
     /**
@@ -199,6 +218,7 @@ public class Login_User extends javax.swing.JFrame {
     private javax.swing.JPasswordField PasswordUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
