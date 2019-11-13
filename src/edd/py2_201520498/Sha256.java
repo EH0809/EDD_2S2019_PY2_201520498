@@ -16,7 +16,7 @@ public class Sha256 {
 
    
     public Sha256() {
-       
+      
     }
     
     public String SHa(String Pass){
