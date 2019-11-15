@@ -5,23 +5,43 @@
  */
 package Structures.GraphDir;
 
+import Structures.AVL.AVL2;
+
 /**
  *
  * @author herre
  */
 public class NodeLLS {
 
+    /**
+     * @return the Grupo
+     */
+    public int getGrupo() {
+        return Grupo;
+    }
+
+    /**
+     * @param Grupo the Grupo to set
+     */
+    public void setGrupo(int Grupo) {
+        this.Grupo = Grupo;
+    }
+
     
     private String Name;
     private LSimple PunteroLS;
     private NodeLLS SiguienteLSS;
     private NodeLLS AnteriorLSS;
+    private int Grupo;
+    private AVL2 AvlTreeLLS;
 
-    public NodeLLS(String Name) {
+    public NodeLLS(String Name, int Grupo) {
         this.Name = Name;
         this.PunteroLS = new LSimple();
         this.SiguienteLSS = null;
         this.AnteriorLSS = null;
+        this.Grupo = Grupo;
+        this.AvlTreeLLS = new AVL2();
     }
     
     
@@ -79,6 +99,20 @@ public class NodeLLS {
      */
     public void setAnteriorLSS(NodeLLS AnteriorLSS) {
         this.AnteriorLSS = AnteriorLSS;
+    }
+
+    /**
+     * @return the AvlTreeLLS
+     */
+    public AVL2 getAvlTreeLLS() {
+        return AvlTreeLLS;
+    }
+
+    /**
+     * @param AvlTreeLLS the AvlTreeLLS to set
+     */
+    public void setAvlTreeLLS(AVL2 AvlTreeLLS) {
+        this.AvlTreeLLS = AvlTreeLLS;
     }
     
 }
