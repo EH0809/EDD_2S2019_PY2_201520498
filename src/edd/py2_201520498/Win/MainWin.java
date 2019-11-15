@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package edd.py2_201520498.Win;
+
 import edd.py2_201520498.EDDPY2_201520498;
 import javax.swing.JOptionPane;
 
@@ -16,8 +17,7 @@ public class MainWin extends javax.swing.JFrame {
     Login_User Login = new Login_User();
     EDDPY2_201520498 Server = new EDDPY2_201520498();
     String Usuario = Login.Nombre;
-    String NombreC ;
-
+    String NombreC;
 
     /**
      * Creates new form MainWin
@@ -41,14 +41,18 @@ public class MainWin extends javax.swing.JFrame {
         ModifyFolders = new javax.swing.JButton();
         DeleteFolders = new javax.swing.JButton();
         ShareFolders = new javax.swing.JButton();
+        CreateFolders1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         CreateArchive = new javax.swing.JButton();
         ModifyArchive = new javax.swing.JButton();
         DeleteArchive = new javax.swing.JButton();
         ShareArchive = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         NameUser = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,10 +66,22 @@ public class MainWin extends javax.swing.JFrame {
         });
 
         ModifyFolders.setText("Modify");
+        ModifyFolders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifyFoldersActionPerformed(evt);
+            }
+        });
 
         DeleteFolders.setText("Delete");
 
         ShareFolders.setText("Share");
+
+        CreateFolders1.setText("Create in Other ");
+        CreateFolders1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateFolders1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,10 +90,11 @@ public class MainWin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CreateFolders, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(CreateFolders1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModifyFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DeleteFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ShareFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ShareFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CreateFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -85,24 +102,38 @@ public class MainWin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(CreateFolders)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CreateFolders1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ModifyFolders)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteFolders)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ShareFolders)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Archive"));
 
         CreateArchive.setText("Create");
+        CreateArchive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateArchiveActionPerformed(evt);
+            }
+        });
 
         ModifyArchive.setText("Modify");
+        ModifyArchive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifyArchiveActionPerformed(evt);
+            }
+        });
 
         DeleteArchive.setText("Delete");
 
         ShareArchive.setText("Share");
+
+        jButton3.setText("Bulk");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -111,24 +142,26 @@ public class MainWin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CreateArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CreateArchive, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                     .addComponent(ModifyArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DeleteArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ShareArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ShareArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addComponent(CreateArchive)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ModifyArchive)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteArchive)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ShareArchive)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jLabel1.setText("USAC FILE DRIVE");
@@ -139,15 +172,29 @@ public class MainWin extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 485, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 305, Short.MAX_VALUE)
         );
 
         NameUser.setEditable(false);
         NameUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jButton1.setText("Reports");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,7 +207,7 @@ public class MainWin extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,23 +215,33 @@ public class MainWin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -193,19 +250,103 @@ public class MainWin extends javax.swing.JFrame {
 
     private void CreateFoldersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateFoldersActionPerformed
         // TODO add your handling code here:
-        NombreC=JOptionPane.showInputDialog("Ingresar Nombre Carpeta");
+        NombreC = JOptionPane.showInputDialog("Ingresar Nombre Carpeta");
         CrearCarpeta();
     }//GEN-LAST:event_CreateFoldersActionPerformed
 
-    public void CrearCarpeta(){
-        if (Server.AgregarCarpetaNueva(Usuario, NombreC)){
+    private void CreateFolders1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateFolders1ActionPerformed
+        // TODO add your handling code here:
+        CrearEnOtra();
+        //Server.ImprimirTodasLasCarpetas(Usuario);
+    }//GEN-LAST:event_CreateFolders1ActionPerformed
+
+    private void ModifyFoldersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyFoldersActionPerformed
+        // TODO add your handling code here:
+        ModificarNombreCarpeta();
+    }//GEN-LAST:event_ModifyFoldersActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Server.ImprimirTodasLasCarpetas(Usuario);
+        // VentanaPrincipal a = new VentanaPrincipal();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        Login.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void CreateArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateArchiveActionPerformed
+        // TODO add your handling code here:
+        AgreagarNuevosArchivos();
+    }//GEN-LAST:event_CreateArchiveActionPerformed
+
+    private void ModifyArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifyArchiveActionPerformed
+        // TODO add your handling code here:
+        ModificarContenido();
+    }//GEN-LAST:event_ModifyArchiveActionPerformed
+
+    public void ModificarContenido() {
+        String NombreArchivo = JOptionPane.showInputDialog("Nombre del Archivo");
+        String Contenido = JOptionPane.showInputDialog("Nuevo Contenido");
+        String Carpeta = JOptionPane.showInputDialog("Nombre de Carpeta del Archivo");
+        if (Server.ModificarContenidoArchivos(Usuario, Carpeta, NombreArchivo, Contenido)) {
+            JOptionPane.showMessageDialog(null, "Se Modifico el Archivo" + NombreArchivo + " a la Carpeta: " + Carpeta);
+            System.out.println("Se Modifico el Archivo " + NombreArchivo + " a la Carpeta: " + Carpeta);
+        } else {
+            System.out.println("No se pudo agregar el Archivo");
+        }
+        Server.ImprimirAVL(Usuario, Carpeta);
+    }
+
+    public void AgreagarNuevosArchivos() {
+        String NombreArchivo = JOptionPane.showInputDialog("Nombre del Archivo");
+        String Contenido = JOptionPane.showInputDialog("Contenido");
+        String Carpeta = JOptionPane.showInputDialog("Carpeta de Creacion del Archivo");
+        if (Server.AgregarArchivosACarpetas(Usuario, Carpeta, NombreArchivo, Contenido)) {
+            JOptionPane.showMessageDialog(null, "Se Agrego el Archivo" + NombreArchivo + " a la Carpeta: " + Carpeta);
+            System.out.println("Se Agrego el Archivo" + NombreArchivo + " a la Carpeta: " + Carpeta);
+        } else {
+            System.out.println("No se pudo agregar el Archivo");
+        }
+        Server.ImprimirAVL(Usuario, Carpeta);
+    }
+
+    public void ModificarNombreCarpeta() {
+        String NombreNuevo = JOptionPane.showInputDialog("Ingresar El Nuevo Nombre de la Carpeta");
+        String NombreViejo = JOptionPane.showInputDialog("Ingresar el Nombre Viejo de la Carpeta");
+
+        if (Server.ModificarNombreCarpetas(Usuario, NombreViejo, NombreNuevo)) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya hay Carpetas con ese Nombre");
+            System.out.println("Ocurrio un problema al insertar");
+        }
+
+    }
+
+    public void CrearEnOtra() {
+        String NombreNueva = JOptionPane.showInputDialog("Ingresar Nombre Carpeta Nueva");
+        String NombrePadre = JOptionPane.showInputDialog("Ingresar Nombre En donde la quiere Crear");
+        if (Server.AgrearEnOtra(Usuario, NombrePadre, NombreNueva)) {
+            // Server.ImprimirTodasLasCarpetas(Usuario);
+        } else {
+            System.out.println("Ocurrio un problema al insertar");
+        }
+    }
+
+    public void CrearCarpeta() {
+        if (Server.AgregarCarpetaNueva(Usuario, NombreC)) {
+
             System.out.println("Si se Ingreso la Carpeta");
-        }else{
+        } else {
             System.out.println("No se ingreso la carpeta");
         }
-        
-    
+
     }
+
     /**
      * @param args the command line arguments
      */
@@ -240,12 +381,12 @@ public class MainWin extends javax.swing.JFrame {
             }
         });
     }
-    
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateArchive;
     private javax.swing.JButton CreateFolders;
+    private javax.swing.JButton CreateFolders1;
     private javax.swing.JButton DeleteArchive;
     private javax.swing.JButton DeleteFolders;
     private javax.swing.JButton ModifyArchive;
@@ -253,6 +394,9 @@ public class MainWin extends javax.swing.JFrame {
     private javax.swing.JTextField NameUser;
     private javax.swing.JButton ShareArchive;
     private javax.swing.JButton ShareFolders;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
