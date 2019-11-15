@@ -184,7 +184,7 @@ public class HashTable2 {
     }
 
     private int hash(long Id) {
-        int valorHash = 0; //valor que debe tomar en el array
+        int valorHash = 0;
         String temp = String.valueOf(Id);
         int plegamiento[] = new int[(temp.length() / getNumeroDigitos(getTamanio())) + 1];
         for (int i = 0; i < plegamiento.length; i++) {
@@ -277,13 +277,38 @@ public class HashTable2 {
         return dot;
     }
 
-    public boolean AgregarCarpeta(String Name, String NombreCarpeta) {
-        System.out.println("Se va a buscar"+ Name);
+    //////////////////////////////////////////////////CARPETAS/////////////////////////////////
+    public boolean AgregarCarpetaNueva(String Name, String NombreCarpeta) {
+        System.out.println("Se va a buscar" + Name);
         User Usuario = BuscarUser(Name);
         if (Usuario != null) {
 //            Usuario.getGrafoDirigido().InsertarNodeoListaS(Usuario.getGrafoDirigido().crearNodo(NombreCarpeta));
+            Usuario.getGrafoDirigido().AgregarLista(NombreCarpeta);
             return true;
-        }else{
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public boolean AgregarCarpetaEnOtra(String Name, String CarpetaPadre, String CarpetaNueva) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().AgregarDentrodeLista(CarpetaPadre, CarpetaNueva);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public boolean ModifcarCarpetas(String Name, String NombreViejo, String NombreNuevo) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            if (Usuario.getGrafoDirigido().Modificar(NombreViejo, NombreNuevo)) {
+                return true;
+            }
+        } else {
             System.out.println("No encontro usuario");
         }
         return false;
@@ -293,9 +318,92 @@ public class HashTable2 {
         User Usuario = BuscarUser(Name);
         if (Usuario != null) {
             Usuario.getGrafoDirigido().Imprimir();
-        }else{
+        } else {
             System.out.println("No se Encontro usuario");
         }
+    }
+
+    public boolean GraficarGrafo(String Name) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().GraficarLista();
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+
+    }
+
+    ///////////////////////////////////////////MATRIZ//////////////////////////////////////
+    public boolean AgregarCarpetaARaiz(String Name, String NombreCarpeta) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getMatrixAd().AddMatrizSoloPadres(NombreCarpeta);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public boolean AgregarCarpetaAOtraCarpeta(String Name, String CarpetaPadre, String CarpetaHija) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            //Usuario.getMatrixAd().AddMatrizSoloHijos(CarpetaHija);
+            Usuario.getMatrixAd().AddMatrix(CarpetaPadre, CarpetaHija);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public boolean GraficarMatriz(String Name) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getMatrixAd().GraphMatrix();
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    ///////////////////////////////////////////////AVL////////////////////////////////////
+    public boolean AgregarAVL(String Name, String NombreCarpeta, String NombredelArchivo, String Contenido) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().AgregarAVLLLSimple(NombreCarpeta, NombredelArchivo, Contenido);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public boolean ModificarContenidoArchivos(String Name, String NombreCarpeta, String NombreArchivo, String NuevoContenido) {
+
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().ModificarALVArchivo(NombreCarpeta, NombreArchivo, NuevoContenido);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+
+    }
+
+    public boolean GraficarAVL(String Name, String NombreCarpeta) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().GraficarArbol(NombreCarpeta);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
     }
 
     /**
