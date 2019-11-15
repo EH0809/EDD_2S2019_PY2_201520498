@@ -1,14 +1,9 @@
- digraph AVL{Node_773[label= " <f0>| <f1> Name: 773\n Content: Nose.exe\n FE: 1 Height: 4\n Time:hoy|<f2> " shape="record"] ; 
-Node_773:f0->Node_675:f1; 
-Node_675[label= " <f0>| <f1> Name: 675\n Content: Mec.txt\n FE: 1 Height: 3\n Time:hoy|<f2> " shape="record"] ; 
-Node_675:f0->Node_653:f1; 
-Node_653[label= " <f0>| <f1> Name: 653\n Content: Carro.h\n FE: 1 Height: 2\n Time:hoy|<f2> " shape="record"] ; 
-Node_653:f0->Node_571:f1; 
-Node_571[label= " <f0>| <f1> Name: 571\n Content: Al.txt\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
-Node_675:f2->Node_711:f1; 
-Node_711[label= " <f0>| <f1> Name: 711\n Content: Mari.mp3\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
-Node_773:f2->Node_786:f1; 
-Node_786[label= " <f0>| <f1> Name: 786\n Content: Hola.txt\n FE: 2 Height: 2\n Time:hoy|<f2> " shape="record"] ; 
-Node_786:f2->Node_872:f1; 
-Node_872[label= " <f0>| <f1> Name: 872\n Content: Carro.cpp\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
+ digraph AVL{Node_168[label= " <f0>| <f1> Name: D22\n Content: PuebaD2\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
+Node_168[label= " <f0>| <f1> Name: D22\n Content: PuebaD2\n FE: 1 Height: 2\n Time:hoy|<f2> " shape="record"] ; 
+Node_168:f2->Node_169:f1; 
+Node_169[label= " <f0>| <f1> Name: D23\n Content: hola mundo\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
+Node_168:f1; 
+Node_168[label= " <f0>| <f1> Name: D22\n Content: PuebaD2\n FE: 1 Height: 2\n Time:hoy|<f2> " shape="record"] ; 
+Node_168:f2->Node_169:f1; 
+Node_169[label= " <f0>| <f1> Name: D23\n Content: Hola universo\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
 }
