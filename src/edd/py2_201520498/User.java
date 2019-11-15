@@ -1,7 +1,11 @@
 package edd.py2_201520498;
 
+import Structures.AVL.AVL;
+import Structures.AVL.AVL2;
+import Structures.GraphDir.LLSimple;
 import edd.py2_201520498.Sha256;
 import Structures.GraphDir.LSimple;
+import Structures.Matrix.Matrix;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,15 +25,17 @@ public class User {
     private String PasswordSha;
     private int Groove;
     private String TimeUser;
-    private LSimple GrafoDirigido;
-
+    private LLSimple GrafoDirigido;
+    private Matrix MatrixAd;
     public User(String User, String Password, String TimeUser) {
         this.Id = toAscci(User);
         this.User = User;
         this.PasswordSha = Encriptacion(Password);
         this.Password = Password;
         this.TimeUser = TimeUser;
-        //this.GrafoDirigido = new LSimple(User);
+        this.GrafoDirigido = new LLSimple();
+        this.MatrixAd = new Matrix();
+
     }
 
     private String Encriptacion(String Pass) {
@@ -133,15 +139,32 @@ public class User {
     /**
      * @return the GrafoDirigido
      */
-    public LSimple getGrafoDirigido() {
+    public LLSimple getGrafoDirigido() {
         return GrafoDirigido;
     }
 
     /**
      * @param GrafoDirigido the GrafoDirigido to set
      */
-    public void setGrafoDirigido(LSimple GrafoDirigido) {
+    public void setGrafoDirigido(LLSimple GrafoDirigido) {
         this.GrafoDirigido = GrafoDirigido;
     }
+
+    /**
+     * @return the MatrixAd
+     */
+    public Matrix getMatrixAd() {
+        return MatrixAd;
+    }
+
+    /**
+     * @param MatrixAd the MatrixAd to set
+     */
+    public void setMatrixAd(Matrix MatrixAd) {
+        this.MatrixAd = MatrixAd;
+    }
+
+    
+   
 
 }
