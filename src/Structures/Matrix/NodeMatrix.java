@@ -11,84 +11,23 @@ package Structures.Matrix;
  */
 public class NodeMatrix {
 
-    /**
-     * @return the NameFolderC
-     */
-    public String getNameFolderC() {
-        return NameFolderC;
-    }
+    private String NombrePadre;
+    private String NombreHijo;
+    private NodeMatrix RightNode;
+    private NodeMatrix LeftNode;
+    private NodeMatrix UpNode;
+    private NodeMatrix DownNode;
 
-    /**
-     * @param NameFolderC the NameFolderC to set
-     */
-    public void setNameFolderC(String NameFolderC) {
-        this.NameFolderC = NameFolderC;
-    }
-
-    /**
-     * @return the NameFolderH
-     */
-    public String getNameFolderH() {
-        return NameFolderH;
-    }
-
-    /**
-     * @param NameFolderH the NameFolderH to set
-     */
-    public void setNameFolderH(String NameFolderH) {
-        this.NameFolderH = NameFolderH;
-    }
-
-    /**
-     * @return the Fil
-     */
-    public int getFil() {
-        return Fil;
-    }
-
-    /**
-     * @param Fil the Fil to set
-     */
-    public void setFil(int Fil) {
-        this.Fil = Fil;
-    }
-
-    /**
-     * @return the Col
-     */
-    public int getCol() {
-        return Col;
-    }
-
-    /**
-     * @param Col the Col to set
-     */
-    public void setCol(int Col) {
-        this.Col = Col;
-    }
-      private int Fil;
-      private int Col;
-      private String NameFolderC;
-      private String NameFolderH;
-      private NodeMatrix RightNode;
-      private NodeMatrix LeftNode;
-      private NodeMatrix UpNode;
-      private NodeMatrix DownNode;
-
-    public NodeMatrix(int Col, int Fil,String NameFolderC, String NameFolderH) {
-        this.Col = Col;
-        this.Fil = Fil;
-        this.NameFolderC = NameFolderC;
-        this.NameFolderH = NameFolderH;
+    public NodeMatrix(String NombrePadre, String NombreHijo) {
+        this.NombrePadre = NombrePadre;
+        this.NombreHijo = NombreHijo;
         this.LeftNode = null;
         this.DownNode = null;
         this.RightNode = null;
         this.UpNode = null;
     }
 
-
-
-
+ 
 
     /**
      * @return the RightNode
@@ -145,10 +84,33 @@ public class NodeMatrix {
     public void setDownNode(NodeMatrix DownNode) {
         this.DownNode = DownNode;
     }
-    
-    
-      
-      
-      
-    
+
+    /**
+     * @return the NombrePadre
+     */
+    public String getNombrePadre() {
+        return NombrePadre;
+    }
+
+    /**
+     * @param NombrePadre the NombrePadre to set
+     */
+    public void setNombrePadre(String NombrePadre) {
+        this.NombrePadre = NombrePadre;
+    }
+
+    /**
+     * @return the NombreHijo
+     */
+    public String getNombreHijo() {
+        return NombreHijo;
+    }
+
+    /**
+     * @param NombreHijo the NombreHijo to set
+     */
+    public void setNombreHijo(String NombreHijo) {
+        this.NombreHijo = NombreHijo;
+    }
+
 }
