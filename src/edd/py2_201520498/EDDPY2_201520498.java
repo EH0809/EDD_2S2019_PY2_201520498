@@ -36,10 +36,9 @@ public class EDDPY2_201520498 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        //Login_User a = new Login_User();
-        //a.setVisible(true);
-        //VentanaPrincipal vp = new VentanaPrincipal();
-        AgregarCarpetaEnCarpeta();
+        Login_User a = new Login_User();
+        a.setVisible(true);
+        //Matrix();
     }
 
     public boolean Buscar(String Name, String Pass) {
@@ -57,11 +56,56 @@ public class EDDPY2_201520498 {
     }
 
     public boolean AgregarCarpetaNueva(String Name, String NombreCarpeta) {
-        if (Table.AgregarCarpeta(Name, NombreCarpeta)) {
-            Table.ImprimirCarpetas(Name);
+        if (Table.AgregarCarpetaNueva(Name, NombreCarpeta)) {
+            if(Table.AgregarCarpetaARaiz(Name,NombreCarpeta)){
+                System.out.println("Si se Agrego a Matriz a Raiz");
+            }
+            
             return true;
         }
         return false;
+    }
+
+    public boolean AgrearEnOtra(String Name, String CarpetaPadre, String CarpertaNueva) {
+        if (Table.AgregarCarpetaEnOtra(Name, CarpetaPadre, CarpertaNueva)) {
+            
+            if (Table.AgregarCarpetaAOtraCarpeta(Name, CarpetaPadre, CarpertaNueva)){
+                System.out.println("Si se Agrego A Matriz Agregar en Otra");
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean ModificarNombreCarpetas(String Name, String NombreViejo, String NombreNuevo) {
+        if (Table.ModifcarCarpetas(Name, NombreViejo, NombreNuevo)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean AgregarArchivosACarpetas(String Name,String NombreCarpeta, String NombreArchivo, String Contenido){
+        if(Table.AgregarAVL(Name, NombreCarpeta,NombreArchivo, Contenido)){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    public boolean ModificarContenidoArchivos(String Name, String NombreCarpeta, String NombreArchivo, String NuevoContenido){
+       if(Table.ModificarContenidoArchivos(Name, NombreCarpeta, NombreArchivo, NuevoContenido)){
+            return true;
+        }
+        return false;
+    }
+    public void ImprimirTodasLasCarpetas(String Name) {
+        Table.ImprimirCarpetas(Name);
+        Table.GraficarGrafo(Name);
+        Table.GraficarMatriz(Name);
+    }
+    
+    public void ImprimirAVL (String Name, String NombreCarpeta){
+        Table.GraficarAVL(Name, NombreCarpeta);
     }
 
     public static void AgregarCarpetaEnCarpeta() {
@@ -73,13 +117,18 @@ public class EDDPY2_201520498 {
         Lista.AgregarDentrodeLista("Proyectos", "EDD");
         Lista.AgregarDentrodeLista("Metallica", "Fade to black");
         Lista.AgregarDentrodeLista("EDD", "P1");
+        Lista.AgregarDentrodeLista("Documentos", "Imagenes");
+        Lista.AgregarDentrodeLista("Metallica", "One");
         Lista.Imprimir();
         System.out.println("Despues");
-        Lista.EliminarDentrodeCarpetas("Documentos","Musica");
+        Lista.Eliminar("Documentos");
+        Lista.EliminarTodasLasCarpetas("Proyectos", "EDD");
         Lista.Imprimir();
-       
+
     }
 
+    
+    
     public static void aVLL() {
         AVL2 a = new AVL2();
         a.InsertarArchivo("Hola.txt", "CarePija");
@@ -104,11 +153,9 @@ public class EDDPY2_201520498 {
 
     public static void Matrix() {
         Matrix M = new Matrix();
-        for (int i = 1; i < 15; i++) {
-            for (int j = 1; j < 15; j++) {
-                M.AddMatrix(j, i, "Contador" + i, "Contador" + j);
-            }
-        }
+        M.AddMatrizSoloPadres("Doc");
+        M.AddMatrix("Doc", "Usac");
+        M.AddMatrix("Doc", "EDD");
         M.GraphMatrix();
 
     }
