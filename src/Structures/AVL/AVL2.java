@@ -281,7 +281,7 @@ public class AVL2 {
             } else if (Te.equalsIgnoreCase("right")) {
                 Ab += "Node_" + String.valueOf(Root.getId()) + ":f1; \n";
             }
-            Ab += "Node_" + String.valueOf(Root.getId()) + "[label= \" <f0>| <f1> Name: " + String.valueOf(Root.getId()) + "\\n Content: " + Root.getName() + "\\n FE: " + String.valueOf(Root.getFE()) + " Height: " + String.valueOf(Root.getHeight()) + "\\n Time:" + String.valueOf(Root.getTimeStamp()) + "|<f2> \" shape=\"record\"] ; \n";
+            Ab += "Node_" + String.valueOf(Root.getId()) + "[label= \" <f0>| <f1> Name: " + String.valueOf(Root.getName()) + "\\n Content: " + Root.getDescription() + "\\n FE: " + String.valueOf(Root.getFE()) + " Height: " + String.valueOf(Root.getHeight()) + "\\n Time:" + String.valueOf(Root.getTimeStamp()) + "|<f2> \" shape=\"record\"] ; \n";
             if (Root.getSonLeft() != null) {
                 Ab += "Node_" + String.valueOf(Root.getId()) + ":f0";
                 Ab += "->";
