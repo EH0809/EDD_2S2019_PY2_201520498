@@ -1,9 +1,8 @@
- digraph AVL{Node_168[label= " <f0>| <f1> Name: D22\n Content: PuebaD2\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
-Node_168[label= " <f0>| <f1> Name: D22\n Content: PuebaD2\n FE: 1 Height: 2\n Time:hoy|<f2> " shape="record"] ; 
-Node_168:f2->Node_169:f1; 
-Node_169[label= " <f0>| <f1> Name: D23\n Content: hola mundo\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
-Node_168:f1; 
-Node_168[label= " <f0>| <f1> Name: D22\n Content: PuebaD2\n FE: 1 Height: 2\n Time:hoy|<f2> " shape="record"] ; 
-Node_168:f2->Node_169:f1; 
-Node_169[label= " <f0>| <f1> Name: D23\n Content: Hola universo\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
+ digraph AVL{Node_735[label= " <f0>| <f1> Name: Header.h\n Content: Este es un archivo cabecera\n FE: 1 Height: 3\n Time:hoy|<f2> " shape="record"] ; 
+Node_735:f0->Node_668:f1; 
+Node_668[label= " <f0>| <f1> Name: Main.py\n Content: Python Scrip\n FE: 2 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
+Node_735:f2->Node_786:f1; 
+Node_786[label= " <f0>| <f1> Name: Hola.txt\n Content: Hola mundo!!!!\n FE: 1 Height: 2\n Time:hoy|<f2> " shape="record"] ; 
+Node_786:f2->Node_1006:f1; 
+Node_1006[label= " <f0>| <f1> Name: chrome.exe\n Content: Este es un archivo ejecutable\n FE: 0 Height: 1\n Time:hoy|<f2> " shape="record"] ; 
 }
