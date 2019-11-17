@@ -80,23 +80,24 @@ public class LSimple {
         return false;
     }
 
-    public NodeLS remover(String Name) {
+    public boolean remover(String Name) {
         NodeLS retirado = null;
         NodeLS actual = getFirtsList();
-        if (actual.getNameDir() == Name) {
+        if (actual.getNameDir().equals(Name)) {
             retirado = actual;
             setFirtsList(getFirtsList().getNextNode());
+            return true;
         } else {
             while (actual.getNextNode() != null) {
-                if (actual.getNextNode().getNameDir() == Name) {
+                if (actual.getNextNode().getNameDir().equals(Name)) {
                     retirado = actual.getNextNode();
                     actual.setNextNode(retirado.getNextNode());
-                    break;
+                    return true;
                 }
                 actual = actual.getNextNode();
             }
         }
-        return retirado;
+        return false;
     }
 
     public void EliminarPorGrupo(String Padre, String Hijo) {
@@ -221,6 +222,16 @@ public class LSimple {
             return true;
         }
         return false;
+    }
+
+    public boolean DescargarArchivo(String NombreCarpeta, String Nombre) {
+        NodeLS Aux = BuscarCarpetas(NombreCarpeta);
+        if (Aux != null) {
+            Aux.getAvlTree().DescargarArchivo(Nombre);
+            return true;
+        }
+        return false;
+
     }
 
     /*   public NodeLS RecorrerNodos(){
