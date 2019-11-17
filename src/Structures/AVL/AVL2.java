@@ -26,7 +26,7 @@ public class AVL2 {
     public void EliminarArchivos(String Name) {
         System.out.println("Se eliminara " + Name);
         //eliminar(toAscci(Name));
-         SendEliminarArchivo(toAscci(Name));
+        SendEliminarArchivo(toAscci(Name));
     }
 
     public boolean eliminar(int Clave) {
@@ -324,12 +324,12 @@ public class AVL2 {
     }
 
     public void SendEliminarArchivo(int Clave) {
-      NodeAVL Aux = Del(getRoot(), Clave);
-      if (Aux != null){
-          System.out.println(Aux.getName());
-      }else{
-          System.out.println("Me cago en la puta");
-      }
+        NodeAVL Aux = Del(getRoot(), Clave);
+        if (Aux != null) {
+            System.out.println(Aux.getName());
+        } else {
+            System.out.println("Me cago en la puta");
+        }
 
     }
 
@@ -358,7 +358,7 @@ public class AVL2 {
                 return balancear(menor);
             }
         }
-         return balancear(Root);
+        return balancear(Root);
     }
 
     NodeAVL DeleteNode(NodeAVL Root, int key) {
@@ -454,6 +454,43 @@ public class AVL2 {
         Node.setHeight(max(obtenerAltura(Node.getSonLeft()), obtenerAltura(Node.getSonRight())) + 1);
         Aux.setHeight(max(obtenerAltura(Aux.getSonLeft()), obtenerAltura(Aux.getSonRight())) + 1);
         return Aux;
+    }
+
+    public boolean DescargarArchivo(String Nombre) {
+        NodeAVL Temp = buscar(toAscci(Nombre), getRoot());
+        if(Temp != null){
+            GruardarComo(Temp.getName(), Temp.getDescription());
+            System.out.println("Si pasa por el arbol" +Temp. getName() +" "+ Temp.getDescription());
+            return true;
+        }else{
+            System.out.println("No encontro archivo con ese nombre "+ Nombre);
+        }
+        return false;
+    }
+
+    public void GruardarComo(String Nombre, String Descripcion) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter(Nombre);
+            pw = new PrintWriter(fichero);
+
+            pw.println(Descripcion);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
     }
 
     /**
