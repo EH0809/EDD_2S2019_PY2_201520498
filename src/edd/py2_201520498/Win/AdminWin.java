@@ -157,7 +157,7 @@ public class AdminWin extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             Bulk();
-            Buscar();
+            MostarCantidad();
         } catch (IOException ex) {
             Logger.getLogger(AdminWin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -179,13 +179,14 @@ public class AdminWin extends javax.swing.JFrame {
         this.setVisible(false);
     
     }
+    
     public void Regresar (){
         Login_User  a = new Login_User();
         a.setVisible(true);
         this.setVisible(false);
     
     }
-
+    
     public void Bulk() throws IOException {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         int returnValue = jfc.showOpenDialog(null);
@@ -211,6 +212,7 @@ public class AdminWin extends javax.swing.JFrame {
         }
         //System.out.println(a);
         CompletarRead(a);
+        Server.InsertardesdeHash("Admin","Carga Masiva");
     }
 
     public void CompletarRead(String archivo) {
@@ -229,11 +231,14 @@ public class AdminWin extends javax.swing.JFrame {
         }
         
     }
+    
     public String Encriptacion(String Pass){
         return En.SHa(Pass);
     }
-    public void Buscar() {
-       // Table.Bus("Juan123");
+    
+    public void MostarCantidad() {
+        int Contador = Server.EnviarContadorCargar();
+        JOptionPane.showMessageDialog(null, "Total de usuario Agregados: " + String.valueOf(Contador));
     }
 
     public String Time() {
