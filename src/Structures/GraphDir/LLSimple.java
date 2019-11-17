@@ -100,6 +100,7 @@ public class LLSimple {
         if (Aux != null) {
             Aux.getPunteroLS().remover(CarpetaHija);
             Aux.getPunteroLS().Limpiar();
+            return true;
         } else {
             NodeLLS Temp = BuscarCarpetasHijas(CarpetaPadre);
             if (Temp != null) {
@@ -127,15 +128,29 @@ public class LLSimple {
         return false;
     }
 
-    public void EliminarDentrodeCarpetas(String CarpetaPadre, String CarpetaHijo) {
+    public boolean EliminarDeCarpetas(String NombrePadre, String NombreCarpeta) {
+        NodeLLS Temp = BuscarCabecera(NombrePadre);
+        if (Temp != null) {
+            Temp.getPunteroLS().remover(NombreCarpeta);
+            return true;
+
+        } else {
+            System.out.println("No es el primero de la lista");
+        }
+        return false;
+    }
+
+    public boolean EliminarDentrodeCarpetas(String CarpetaPadre, String CarpetaHijo) {
         if (EliminarTodasLasCarpetas(CarpetaPadre, CarpetaHijo)) {
             NodeLLS Aux = BuscarCabecera(CarpetaPadre);
             if (Aux != null) {
                 Aux.getPunteroLS().remover(CarpetaHijo);
+                return true;
             } else {
                 NodeLLS Temp = BuscarCarpetasHijas(CarpetaPadre);
                 if (Temp != null) {
                     Temp.getPunteroLS().remover(CarpetaHijo);
+                    return true;
 
                 } else {
                     System.out.println("No es el primero de la lista");
@@ -143,7 +158,9 @@ public class LLSimple {
             }
         } else {
             System.out.println("No es primera");
+            return false;
         }
+        return false;
     }
 
     public void GraficarLista() {
@@ -204,23 +221,25 @@ public class LLSimple {
         return Completo;
     }
 
-    public NodeLLS Eliminar(String Name) {
+    public boolean Eliminar(String Name) {
         NodeLLS retirado = null;
         NodeLLS actual = getFirstList();
         if (actual.getName().equals(Name)) {
             retirado = actual;
             setFirstList(getFirstList().getSiguienteLSS());
+            return true;
         } else {
             while (actual.getSiguienteLSS() != null) {
-                if (actual.getSiguienteLSS().getName() == Name) {
+                if (actual.getSiguienteLSS().getName().equalsIgnoreCase(Name)) {
                     retirado = actual.getSiguienteLSS();
                     actual.setSiguienteLSS(retirado.getSiguienteLSS());
-                    break;
+
+                    return true;
                 }
                 actual = actual.getSiguienteLSS();
             }
         }
-        return retirado;
+        return false;
     }
 
     public boolean AgregarAVLLLSimple(String NombreCarpeta, String NombreArchivo, String Contenido) {
@@ -258,9 +277,9 @@ public class LLSimple {
         }
         return false;
     }
-    
-    public boolean GraficarArbol(String NombreCarepta){
-    NodeLLS Aux = BuscarCabecera(NombreCarepta);
+
+    public boolean GraficarArbol(String NombreCarepta) {
+        NodeLLS Aux = BuscarCabecera(NombreCarepta);
         if (Aux != null) {
             Aux.getAvlTreeLLS().SentGraphAVL();
             return true;
@@ -276,7 +295,24 @@ public class LLSimple {
         }
         return false;
     }
-    
+
+    public boolean DescargarArchivo(String NombreCarpeta, String Nombre) {
+        NodeLLS Aux = BuscarCabecera(NombreCarpeta);
+        if (Aux != null) {
+            Aux.getAvlTreeLLS().DescargarArchivo(Nombre);
+            return true;
+        } else {
+            NodeLLS Temp = BuscarCarpetasHijas(NombreCarpeta);
+            if (Temp != null) {
+                Temp.getPunteroLS().DescargarArchivo(NombreCarpeta,Nombre);
+                return true;
+            } else {
+                System.out.println("No se Encontro");
+            }
+
+        }
+        return false;
+    }
 
     /**
      * @return the FirstList
