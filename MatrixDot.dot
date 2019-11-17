@@ -9,36 +9,32 @@ YDoc[label = "Doc " , group =0];
 YDoc-> YImage[dir=both];
 YDoc-> nD1_Doc[dir=both];
 { rank = same; YDoc; nD1_Doc }
-nD1_Doc-> nD2_Doc[dir=both];
-{ rank = same; nD1_Doc; nD2_Doc }
 YImage[label = "Image " , group =0];
 YImage-> YDoc[dir=both];
 YImage-> nI1_Image[dir=both];
 { rank = same; YImage; nI1_Image }
 YDoc[label = "Doc " , group =0];
-YDoc-> YDoc[dir=both];
-YDoc[label = "Doc " , group =0];
 YDoc-> YImage[dir=both];
-YImage[label = "Image " ,group =X0];
+YImage[label = "Image " , group =0];
+YImage-> YDoc[dir=both];
+YDoc[label = "Doc " ,group =X0];
 Terminal -> XDoc [dir=both];
 XDoc[label = "Doc "  , group = XDoc];
 XDoc-> XImage[dir=both];
 { rank = same; Terminal; XDoc }
 XImage[label = "Image "  , group = XImage];
-XImage-> XD1[dir=both];
+XImage-> XDoc[dir=both];
 { rank = same; Terminal; XImage }
-XD1[label = "D1 "  , group = XD1];
-XD1-> XD2[dir=both];
-{ rank = same; Terminal; XD1 }
-nD1_Doc[label = "Doc/D1 "   width = 1.5, group =XD1];
-XD1->nD1_Doc[dir=both];
-XD2[label = "D2 "  , group = XD2];
-XD2-> XI1[dir=both];
-{ rank = same; Terminal; XD2 }
-nD2_Doc[label = "Doc/D2 "   width = 1.5, group =XD2];
-XD2->nD2_Doc[dir=both];
-XI1[label = "I1 " , group =XI1];
+XDoc[label = "Doc "  , group = XDoc];
+XDoc-> XI1[dir=both];
+{ rank = same; Terminal; XDoc }
+XI1[label = "I1 "  , group = XI1];
+XI1-> XD1[dir=both];
 { rank = same; Terminal; XI1 }
 nI1_Image[label = "Image/I1 "   width = 1.5, group =XI1];
-XI1-> nI1_Image[dir=both];
+XI1->nI1_Image[dir=both];
+XD1[label = "D1 " , group =XD1];
+{ rank = same; Terminal; XD1 }
+nD1_Doc[label = "Doc/D1 "   width = 1.5, group =XD1];
+XD1-> nD1_Doc[dir=both];
 }
