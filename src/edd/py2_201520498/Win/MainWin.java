@@ -6,7 +6,19 @@
 package edd.py2_201520498.Win;
 
 import edd.py2_201520498.EDDPY2_201520498;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -18,6 +30,7 @@ public class MainWin extends javax.swing.JFrame {
     EDDPY2_201520498 Server = new EDDPY2_201520498();
     String Usuario = Login.Nombre;
     String NombreC;
+    public static String NombreDelaCarpetaDeCargadelArbol;
 
     /**
      * Creates new form MainWin
@@ -42,14 +55,15 @@ public class MainWin extends javax.swing.JFrame {
         DeleteFolders = new javax.swing.JButton();
         ShareFolders = new javax.swing.JButton();
         CreateFolders1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         CreateArchive = new javax.swing.JButton();
         ModifyArchive = new javax.swing.JButton();
         DeleteArchive = new javax.swing.JButton();
         ShareArchive = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         NameUser = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -73,13 +87,30 @@ public class MainWin extends javax.swing.JFrame {
         });
 
         DeleteFolders.setText("Delete");
+        DeleteFolders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteFoldersActionPerformed(evt);
+            }
+        });
 
         ShareFolders.setText("Share");
+        ShareFolders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShareFoldersActionPerformed(evt);
+            }
+        });
 
         CreateFolders1.setText("Create in Other ");
         CreateFolders1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateFolders1ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Delete in Other");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -94,7 +125,8 @@ public class MainWin extends javax.swing.JFrame {
                     .addComponent(ModifyFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DeleteFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ShareFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CreateFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(CreateFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -108,9 +140,11 @@ public class MainWin extends javax.swing.JFrame {
                 .addComponent(ModifyFolders)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DeleteFolders)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ShareFolders)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Archive"));
@@ -122,7 +156,7 @@ public class MainWin extends javax.swing.JFrame {
             }
         });
 
-        ModifyArchive.setText("Modify");
+        ModifyArchive.setText("Modify Content");
         ModifyArchive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModifyArchiveActionPerformed(evt);
@@ -134,6 +168,18 @@ public class MainWin extends javax.swing.JFrame {
         ShareArchive.setText("Share");
 
         jButton3.setText("Bulk");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Downland");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -142,11 +188,12 @@ public class MainWin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CreateArchive, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                    .addComponent(ModifyArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CreateArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ModifyArchive, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                     .addComponent(DeleteArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ShareArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -161,23 +208,12 @@ public class MainWin extends javax.swing.JFrame {
                 .addComponent(ShareArchive)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("USAC FILE DRIVE");
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("DRIVE"));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
-        );
 
         NameUser.setEditable(false);
         NameUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -202,47 +238,36 @@ public class MainWin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(NameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -268,6 +293,7 @@ public class MainWin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Server.ImprimirTodasLasCarpetas(Usuario);
+        Server.InsertardesdeHash(Usuario, "Generando Imagenes");
         // VentanaPrincipal a = new VentanaPrincipal();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -287,6 +313,125 @@ public class MainWin extends javax.swing.JFrame {
         // TODO add your handling code here:
         ModificarContenido();
     }//GEN-LAST:event_ModifyArchiveActionPerformed
+
+    private void ShareFoldersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShareFoldersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ShareFoldersActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        TodoCargar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void DeleteFoldersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteFoldersActionPerformed
+        // TODO add your handling code here:
+        EliminarCarpetasPadre();
+    }//GEN-LAST:event_DeleteFoldersActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        EliminarCarpetasHijas();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        DescargarArchivo();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    public void DescargarArchivo() {
+        String NombreArchivo = JOptionPane.showInputDialog("Nombre del Archivo");
+        String NombreCarpeta = JOptionPane.showInputDialog("Nombre de la Carpeta");
+        if (Server.DescargarArchivo(Usuario,NombreCarpeta, NombreArchivo)) {
+            System.out.println("Si se Descarga el archovp");
+        } else {
+            System.out.println("No se ha podido descargar el arhcivo ");
+        }
+
+    }
+
+    public void EliminarCarpetasPadre() {
+        String NombreHija = JOptionPane.showInputDialog("Nombre de la Carpeta");
+        if (Server.EliminarCarpetarPadre(Usuario, NombreHija)) {
+            Server.InsertardesdeHash(Usuario, "Se Elimino la Carpeta" + NombreHija);
+        } else {
+            Server.InsertardesdeHash(Usuario, "No se pudo Eliminar la Carpeta " + NombreHija);
+        }
+    }
+
+    public void EliminarCarpetasHijas() {
+        String NombreHija = JOptionPane.showInputDialog("Nombre de la Carpeta");
+        String NombrePadre = JOptionPane.showInputDialog("Nombre de la Carpeta donde se Encuentra");
+        if (Server.EliiminarCarpetasHijas(Usuario, NombrePadre, NombreHija)) {
+            Server.InsertardesdeHash(Usuario, "Se Elimino la Carpeta" + NombreHija);
+        } else {
+            Server.InsertardesdeHash(Usuario, "No se pudo Eliminar la Carpeta " + NombreHija);
+        }
+
+    }
+
+    public void TodoCargar() {
+        NombreDelaCarpetaDeCargadelArbol = JOptionPane.showInputDialog("Nombre de la Carpeta a Crear los Archivos");
+        try {
+            Bulk();
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Server.ImprimirAVL(Usuario, NombreDelaCarpetaDeCargadelArbol);
+    }
+
+    public void Bulk() throws IOException {
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int returnValue = jfc.showOpenDialog(null);
+        String a = "";
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = jfc.getSelectedFile();
+            System.out.println(selectedFile.getAbsolutePath());
+            a = selectedFile.getAbsolutePath();
+            Read(a);
+
+        }
+
+    }
+
+    public void Read(String ruta) throws FileNotFoundException, IOException {
+        File file = new File(ruta);
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String st;
+        String a = "";
+        Scanner sc = new Scanner(file);
+        while ((st = br.readLine()) != null) {
+            a += st + "\n";
+        }
+        System.out.println(a);
+        CompletarRead(a);
+    }
+
+    public void CompletarRead(String archivo) {
+        String[] fila = archivo.split("\n");
+        String[] Pi;
+        String NombreArchivo, Contendio;
+        for (int i = 0; i < fila.length; i++) {
+            //Pi = fila[i].split(";");
+            Pi = fila[i].split(",");
+            NombreArchivo = Pi[0];
+            Contendio = Pi[1].replace("\"", "");
+            if (!NombreArchivo.equalsIgnoreCase("Archivo") && !Contendio.equalsIgnoreCase("Contenido")) {
+                if (Server.AgregarArchivosACarpetas(Usuario, NombreDelaCarpetaDeCargadelArbol, NombreArchivo, Contendio)) {
+                    System.out.println("Si se Agregan ");
+                } else {
+                    System.out.println("No Se agregan ");
+                }
+                // System.out.println("Usuario:" +Usuario +" Password:"+Pass+" Pass Encriptado:"+Encriptacion(Pass));
+            }
+        }
+    }
+
+    public String Time() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String a = dateFormat.format(new Date());
+        return a;
+    }
 
     public void ModificarContenido() {
         String NombreArchivo = JOptionPane.showInputDialog("Nombre del Archivo");
@@ -311,7 +456,7 @@ public class MainWin extends javax.swing.JFrame {
         } else {
             System.out.println("No se pudo agregar el Archivo");
         }
-        Server.ImprimirAVL(Usuario, Carpeta);
+        //   Server.ImprimirAVL(Usuario, Carpeta);
     }
 
     public void ModificarNombreCarpeta() {
@@ -397,9 +542,10 @@ public class MainWin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
