@@ -9,6 +9,7 @@ import edd.py2_201520498.User;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import Structures.Pila.Pila;
 
 /**
  *
@@ -111,6 +112,7 @@ public class HashTable2 {
             InsertarUser(User);
             return true;
         } else {
+
             System.out.println("La Contraseña es menos de 8 caracteres o usuario ya ingresado:" + User.getUser());
         }
         return false;
@@ -279,7 +281,6 @@ public class HashTable2 {
 
     //////////////////////////////////////////////////CARPETAS/////////////////////////////////
     public boolean AgregarCarpetaNueva(String Name, String NombreCarpeta) {
-        System.out.println("Se va a buscar" + Name);
         User Usuario = BuscarUser(Name);
         if (Usuario != null) {
 //            Usuario.getGrafoDirigido().InsertarNodeoListaS(Usuario.getGrafoDirigido().crearNodo(NombreCarpeta));
@@ -306,6 +307,30 @@ public class HashTable2 {
         User Usuario = BuscarUser(Name);
         if (Usuario != null) {
             if (Usuario.getGrafoDirigido().Modificar(NombreViejo, NombreNuevo)) {
+                return true;
+            }
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public boolean EliminarCarpetasPadre(String Name, String NombrePadre) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            if (Usuario.getGrafoDirigido().Eliminar(NombrePadre)) {
+                return true;
+            }
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
+    public boolean EliminarCarpetasHijas(String Name, String NombrePadre, String NombreHija) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            if (Usuario.getGrafoDirigido().EliminarDeCarpetas(NombrePadre, NombreHija)) {
                 return true;
             }
         } else {
@@ -404,6 +429,18 @@ public class HashTable2 {
             System.out.println("No encontro usuario");
         }
         return false;
+    }
+
+    public boolean DescargarArchivo(String Name, String NombreCarepta, String NombreArchivo) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().DescargarArchivo(NombreCarepta, NombreArchivo);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+
     }
 
     /**
