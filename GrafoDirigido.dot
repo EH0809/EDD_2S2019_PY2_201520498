@@ -1,13 +1,6 @@
 digraph GrafoDirigido{ 
 node[shape=record]; 
-nodeCDoc[label="Doc"];
+nodeCImage[label="Image"];
 node1 [label="P"]; 
-subgraph cluster_Doc{ 
-nodeDocD1[label="D1"];
-nodeCDoc->nodeDocD1;nodeDocD2[label="D2"];
-nodeCDoc->nodeDocD2;}nodeCImage[label="Image"];
-subgraph cluster_Image{ 
-nodeImageI1[label="I1"];
-nodeCImage->nodeImageI1;}node1 -> nodeCDoc;
 node1 -> nodeCImage;
-}{rank=same nodel;Doc;Image;}
+}{rank=same nodel;Image;}
