@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import edd.py2_201520498.Win.Login_User;
 import Structures.GraphDir.LLSimple;
+import Structures.Pila.Pila;
+import edd.py2_201520498.Win.Bitacora;
 import edd.py2_201520498.Win.VentanaPrincipal;
 
 /**
@@ -31,18 +33,36 @@ import edd.py2_201520498.Win.VentanaPrincipal;
 public class EDDPY2_201520498 {
 
     public static HashTable2 Table = new HashTable2(7);
+    public static Pila Pilaaaaa = new Pila();
+    public static int ContadorCarga =  0;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
+        // Bitacora bita = new Bitacora();
         Login_User a = new Login_User();
+        //bita.setVisible(true);
         a.setVisible(true);
         //Matrix();
     }
 
+    public String MostarBitacora() {
+        return Pilaaaaa.Imprimir2();
+    }
+
+    public void InsertardesdeHash(String Name, String Descripcion) {
+        Pilaaaaa.InsertaraPila(Name, Descripcion);
+
+    }
+
+    public void RegistroAdmin(String Name, String Descripcion) {
+        Pilaaaaa.InsertaraPila(Name, Descripcion);
+    }
+
     public boolean Buscar(String Name, String Pass) {
         if (Table.LoginUser(Name, Pass)) {
+            Pilaaaaa.InsertaraPila(Name, "Ha Iniciado Sesion");
             return true;
         }
         return false;
@@ -50,17 +70,22 @@ public class EDDPY2_201520498 {
 
     public boolean AgregarNuevoUsuario(String Name, String Pass, String Time) {
         if (Table.VerificardorPass(new User(Name, Pass, Time))) {
+            Pilaaaaa.InsertaraPila(Name, "Agregar un Nuevo Usuario");
             return true;
+        } else {
+
         }
         return false;
     }
 
     public boolean AgregarCarpetaNueva(String Name, String NombreCarpeta) {
         if (Table.AgregarCarpetaNueva(Name, NombreCarpeta)) {
-            if(Table.AgregarCarpetaARaiz(Name,NombreCarpeta)){
+            Pilaaaaa.InsertaraPila(Name, "Se Agrego una Nueva Carpeta " + NombreCarpeta);
+            if (Table.AgregarCarpetaARaiz(Name, NombreCarpeta)) {
+
                 System.out.println("Si se Agrego a Matriz a Raiz");
             }
-            
+
             return true;
         }
         return false;
@@ -68,8 +93,8 @@ public class EDDPY2_201520498 {
 
     public boolean AgrearEnOtra(String Name, String CarpetaPadre, String CarpertaNueva) {
         if (Table.AgregarCarpetaEnOtra(Name, CarpetaPadre, CarpertaNueva)) {
-            
-            if (Table.AgregarCarpetaAOtraCarpeta(Name, CarpetaPadre, CarpertaNueva)){
+            Pilaaaaa.InsertaraPila(Name, "Se Agrego una Carpeta En una ya existente");
+            if (Table.AgregarCarpetaAOtraCarpeta(Name, CarpetaPadre, CarpertaNueva)) {
                 System.out.println("Si se Agrego A Matriz Agregar en Otra");
             }
             return true;
@@ -79,33 +104,56 @@ public class EDDPY2_201520498 {
 
     public boolean ModificarNombreCarpetas(String Name, String NombreViejo, String NombreNuevo) {
         if (Table.ModifcarCarpetas(Name, NombreViejo, NombreNuevo)) {
+            Pilaaaaa.InsertaraPila(Name, "Se a Modificar el Nombre de la Carpeta " + NombreViejo + " Por " + NombreNuevo);
             return true;
         }
         return false;
     }
 
-    public boolean AgregarArchivosACarpetas(String Name,String NombreCarpeta, String NombreArchivo, String Contenido){
-        if(Table.AgregarAVL(Name, NombreCarpeta,NombreArchivo, Contenido)){
+    public boolean AgregarArchivosACarpetas(String Name, String NombreCarpeta, String NombreArchivo, String Contenido) {
+        if (Table.AgregarAVL(Name, NombreCarpeta, NombreArchivo, Contenido)) {
+            Pilaaaaa.InsertaraPila(Name, "Se Agrego un Archivo a la carpeta " + NombreArchivo);
             return true;
         }
         return false;
     }
-    
-    
-    public boolean ModificarContenidoArchivos(String Name, String NombreCarpeta, String NombreArchivo, String NuevoContenido){
-       if(Table.ModificarContenidoArchivos(Name, NombreCarpeta, NombreArchivo, NuevoContenido)){
+
+    public boolean ModificarContenidoArchivos(String Name, String NombreCarpeta, String NombreArchivo, String NuevoContenido) {
+        if (Table.ModificarContenidoArchivos(Name, NombreCarpeta, NombreArchivo, NuevoContenido)) {
+            Pilaaaaa.InsertaraPila(Name, "Se modifica el contenido del archivo " + NombreArchivo);
             return true;
         }
         return false;
     }
+
     public void ImprimirTodasLasCarpetas(String Name) {
         Table.ImprimirCarpetas(Name);
         Table.GraficarGrafo(Name);
-        Table.GraficarMatriz(Name);
+        //Table.GraficarMatriz(Name);
     }
-    
-    public void ImprimirAVL (String Name, String NombreCarpeta){
-        Table.GraficarAVL(Name, NombreCarpeta);
+
+    public void ImprimirAVL(String Name, String NombreCarpeta) {
+        if (Table.GraficarAVL(Name, NombreCarpeta)) {
+            System.out.println("Si se Imprimr arbol");
+        } else {
+            System.out.println(" No se Imprime el Arbol");
+        }
+    }
+
+    public boolean EliminarCarpetarPadre(String Name, String NombrePadre) {
+        if (Table.EliminarCarpetasPadre(Name, NombrePadre)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public boolean EliiminarCarpetasHijas(String Name, String NombrePadre, String NombreHija) {
+        if (Table.EliminarCarpetasHijas(Name, NombrePadre, NombreHija)) {
+            return true;
+        }
+        return false;
+
     }
 
     public static void AgregarCarpetaEnCarpeta() {
@@ -127,8 +175,6 @@ public class EDDPY2_201520498 {
 
     }
 
-    
-    
     public static void aVLL() {
         AVL2 a = new AVL2();
         a.InsertarArchivo("Hola.txt", "CarePija");
@@ -161,7 +207,26 @@ public class EDDPY2_201520498 {
     }
 
     public void EnviarHas(String Name, String Pass, String Time) {
-        Table.VerificardorPass(new User(Name, Pass, Time));
+        if (Table.VerificardorPass(new User(Name, Pass, Time))) {
+            ContadorCarga++;
+            Pilaaaaa.InsertaraPila(Name, "Se Ha agreagado " + Name);
+        } else {
+            Pilaaaaa.InsertaraPila(Name, "No se Ha podido Ingresar a " + Name);
+        }
+    }
+    
+    public int EnviarContadorCargar(){
+        return ContadorCarga;
+    }
+    public boolean DescargarArchivo(String Name, String NombreCarpeta, String NombreArchivo){
+            if (Table.DescargarArchivo(Name, NombreCarpeta, NombreArchivo)){
+                Pilaaaaa.InsertaraPila(Name, "Se descarga "+NombreArchivo);
+                return true;
+            }else{
+                Pilaaaaa.InsertaraPila(Name, "No se ha podido descarga "+NombreArchivo);
+            }
+      
+        return false;
     }
 
     public void GraphTable() {
@@ -169,7 +234,8 @@ public class EDDPY2_201520498 {
     }
 
     public void AddNewUser(String Name, String Pass, String Time) {
-        this.Table.VerificardorPass(new User(Name, Pass, Time));
+        Table.VerificardorPass(new User(Name, Pass, Time));
+        Pilaaaaa.InsertaraPila(Name, "Se agrego un nuevo Usuario");
     }
 
     public static void ab() throws IOException {
