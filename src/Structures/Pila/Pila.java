@@ -13,26 +13,54 @@ import java.util.Date;
  * @author herre
  */
 public class Pila {
+
     private NodePila PrimeroPila;
+    private String Parrafo = "";
 
     public Pila() {
         this.PrimeroPila = null;
     }
-    
-    public boolean Vacia(){
+
+    public boolean Vacia() {
         return getPrimeroPila() == null;
     }
-    
-    public void InsertaraPila(String Nombre, String Descripcion){
-        NodePila Nuevo = new NodePila(Nombre, Descripcion,Time());
-        if(Vacia()){
+
+    public void InsertaraPila(String Nombre, String Descripcion) {
+        NodePila Nuevo = new NodePila(Nombre, Descripcion, Time());
+        if (Vacia()) {
             setPrimeroPila(Nuevo);
-        }else{
+        } else {
             Nuevo.setSiguientePila(getPrimeroPila());
             setPrimeroPila(Nuevo);
         }
     }
+
+    public String Imprimir() {
+        NodePila Aux = getPrimeroPila();
+        if (Aux != null) {
+
+            while (Aux != null) {
+                Parrafo += "Usuario: " + Aux.getUsuario() + " Descripcion:" + Aux.getDescripcion() + " Tiempo:" + Aux.getTime();
+                Aux = Aux.getSiguientePila();
+            }
+        } else {
+            System.out.println("No Hay Para imprimir la pila");
+        }
+
+        return Parrafo;
+    }
     
+    public String Imprimir2(){
+        NodePila Aux = getPrimeroPila();
+        String a = "";
+        if (Aux != null){
+            a = "Usuario: " + Aux.getUsuario() + " Descripcion:" + Aux.getDescripcion() + " Tiempo:" + Aux.getTime();
+            return a;
+        }
+        return a;
+    
+    }
+
     public String Time() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String a = dateFormat.format(new Date());
@@ -51,5 +79,19 @@ public class Pila {
      */
     public void setPrimeroPila(NodePila PrimeroPila) {
         this.PrimeroPila = PrimeroPila;
+    }
+
+    /**
+     * @return the Parrafo
+     */
+    public String getParrafo() {
+        return Parrafo;
+    }
+
+    /**
+     * @param Parrafo the Parrafo to set
+     */
+    public void setParrafo(String Parrafo) {
+        this.Parrafo = Parrafo;
     }
 }
