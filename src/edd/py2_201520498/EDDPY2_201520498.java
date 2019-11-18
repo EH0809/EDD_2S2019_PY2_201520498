@@ -133,6 +133,15 @@ public class EDDPY2_201520498 {
         Table.Graph();
     }
 
+    public void ImprimirGrafo(String Name) {
+        Table.GraficarGrafo(Name);
+    }
+
+    public void ImprimMatrix(String Name) {
+        Table.GraficarMatriz(Name);
+    }
+    
+
     public void ImprimirAVL(String Name, String NombreCarpeta) {
         if (Table.GraficarAVL(Name, NombreCarpeta)) {
             System.out.println("Si se Imprimr arbol");
@@ -157,11 +166,10 @@ public class EDDPY2_201520498 {
 
     }
 
-    public String TraerContenido(String Name, String NombreArchivo){
+    public String TraerContenido(String Name, String NombreArchivo) {
         return Table.TraerContenido(Name, NombreArchivo);
     }
-    
-    
+
     public static void AgregarCarpetaEnCarpeta() {
         LLSimple Lista = new LLSimple();
         Lista.AgregarLista("Documentos");
@@ -214,7 +222,7 @@ public class EDDPY2_201520498 {
 
     public boolean Compartir(String Name2) {
         if (Table.VerificarUsuarioCompartir(Name2)) {
-            System.out.println("Se Encontro Usuario "+Name2);
+            System.out.println("Se Encontro Usuario " + Name2);
             return true;
         }
         return false;
@@ -222,7 +230,7 @@ public class EDDPY2_201520498 {
 
     public boolean VerificarSiExisteArchivo(String Name, String NombreArchivo) {
         if (Table.VerificarArchivo(Name, NombreArchivo)) {
-            System.out.println("Si existe el Archivo "+NombreArchivo);
+            System.out.println("Si existe el Archivo " + NombreArchivo);
             return true;
         }
         return false;
