@@ -384,6 +384,16 @@ public class HashTable2 {
         return false;
     }
 
+    public boolean VerificarUsuarioCompartir(String Name) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+    }
+
     public boolean GraficarMatriz(String Name) {
         User Usuario = BuscarUser(Name);
         if (Usuario != null) {
@@ -405,6 +415,29 @@ public class HashTable2 {
             System.out.println("No encontro usuario");
         }
         return false;
+    }
+
+    public boolean VerificarArchivo(String Name, String nombreArchivo) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            Usuario.getGrafoDirigido().ComparirLSimple(nombreArchivo);
+            return true;
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return false;
+
+    }
+
+    public String TraerContenido(String Name, String NombreArchivo) {
+        User Usuario = BuscarUser(Name);
+        if (Usuario != null) {
+            return Usuario.getGrafoDirigido().TrerContenido(NombreArchivo);
+        } else {
+            System.out.println("No encontro usuario");
+        }
+        return "";
+
     }
 
     public boolean ModificarContenidoArchivos(String Name, String NombreCarpeta, String NombreArchivo, String NuevoContenido) {
