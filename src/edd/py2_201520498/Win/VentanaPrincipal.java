@@ -20,12 +20,12 @@ import javax.swing.JScrollPane;
 public class VentanaPrincipal extends JFrame implements ActionListener {
 
     private JPanel Panel;
-    private JButton btnAbrir, btnAumentar, btnDisminuir, btnImprimir;
+    private JButton btnAbrir, btnAumentar, btnDisminuir, btnImprimir, BotonCerrar;
     private File archivo;
     private CuadroImagen VentanaInterior;
     private JScrollPane scroll;
     private String imagenes[];
-   
+
     private String path;
     private int numImg;
 
@@ -43,18 +43,18 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         btnAbrir = new JButton("Abrir");
         btnAumentar = new JButton("+");
         btnDisminuir = new JButton("-");
-        btnImprimir = new JButton("Imprimir");
+        BotonCerrar = new JButton("Cerrar");
         Panel.add(btnAbrir);
         Panel.add(btnAumentar);
         Panel.add(btnDisminuir);
-        Panel.add(btnImprimir);
+        Panel.add(BotonCerrar);
 
         this.add(Panel, BorderLayout.SOUTH);
         //listeners
         btnAbrir.addActionListener(this);
         btnAumentar.addActionListener(this);
         btnDisminuir.addActionListener(this);
-        btnImprimir.addActionListener(this);
+        BotonCerrar.addActionListener(this);
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -63,13 +63,13 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
     //metodo de ActionListener
     public void actionPerformed(ActionEvent e) {
-         if (e.getSource() == btnAbrir) {
+        if (e.getSource() == btnAbrir) {
             JFileChooser jfc = new JFileChooser();
             int apr = jfc.showOpenDialog(this);
             if (apr == jfc.APPROVE_OPTION) {
                 archivo = jfc.getSelectedFile();
                 imagenes = archivo.getParentFile().list();
-                
+
                 path = archivo.getParent();
                 VentanaInterior.setImagen(archivo.getAbsoluteFile().toString());
             }
@@ -77,8 +77,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
             VentanaInterior.aumentar();
         } else if (e.getSource() == btnDisminuir) {
             VentanaInterior.disminuir();
-        } else if (e.getSource() == btnImprimir) {
-            VentanaInterior.imprimir();
+        } else if (e.getSource() == BotonCerrar) {
+            this.setVisible(false);
+
         }
     }//funciones getter y setter
 
