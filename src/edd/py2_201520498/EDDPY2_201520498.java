@@ -34,7 +34,7 @@ public class EDDPY2_201520498 {
 
     public static HashTable2 Table = new HashTable2(7);
     public static Pila Pilaaaaa = new Pila();
-    public static int ContadorCarga =  0;
+    public static int ContadorCarga = 0;
 
     /**
      * @param args the command line arguments
@@ -129,7 +129,8 @@ public class EDDPY2_201520498 {
     public void ImprimirTodasLasCarpetas(String Name) {
         Table.ImprimirCarpetas(Name);
         Table.GraficarGrafo(Name);
-        //Table.GraficarMatriz(Name);
+        Table.GraficarMatriz(Name);
+        Table.Graph();
     }
 
     public void ImprimirAVL(String Name, String NombreCarpeta) {
@@ -156,6 +157,11 @@ public class EDDPY2_201520498 {
 
     }
 
+    public String TraerContenido(String Name, String NombreArchivo){
+        return Table.TraerContenido(Name, NombreArchivo);
+    }
+    
+    
     public static void AgregarCarpetaEnCarpeta() {
         LLSimple Lista = new LLSimple();
         Lista.AgregarLista("Documentos");
@@ -206,6 +212,22 @@ public class EDDPY2_201520498 {
 
     }
 
+    public boolean Compartir(String Name2) {
+        if (Table.VerificarUsuarioCompartir(Name2)) {
+            System.out.println("Se Encontro Usuario "+Name2);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean VerificarSiExisteArchivo(String Name, String NombreArchivo) {
+        if (Table.VerificarArchivo(Name, NombreArchivo)) {
+            System.out.println("Si existe el Archivo "+NombreArchivo);
+            return true;
+        }
+        return false;
+    }
+
     public void EnviarHas(String Name, String Pass, String Time) {
         if (Table.VerificardorPass(new User(Name, Pass, Time))) {
             ContadorCarga++;
@@ -214,18 +236,19 @@ public class EDDPY2_201520498 {
             Pilaaaaa.InsertaraPila(Name, "No se Ha podido Ingresar a " + Name);
         }
     }
-    
-    public int EnviarContadorCargar(){
+
+    public int EnviarContadorCargar() {
         return ContadorCarga;
     }
-    public boolean DescargarArchivo(String Name, String NombreCarpeta, String NombreArchivo){
-            if (Table.DescargarArchivo(Name, NombreCarpeta, NombreArchivo)){
-                Pilaaaaa.InsertaraPila(Name, "Se descarga "+NombreArchivo);
-                return true;
-            }else{
-                Pilaaaaa.InsertaraPila(Name, "No se ha podido descarga "+NombreArchivo);
-            }
-      
+
+    public boolean DescargarArchivo(String Name, String NombreCarpeta, String NombreArchivo) {
+        if (Table.DescargarArchivo(Name, NombreCarpeta, NombreArchivo)) {
+            Pilaaaaa.InsertaraPila(Name, "Se descarga " + NombreArchivo);
+            return true;
+        } else {
+            Pilaaaaa.InsertaraPila(Name, "No se ha podido descarga " + NombreArchivo);
+        }
+
         return false;
     }
 
