@@ -27,7 +27,8 @@ public class Matrix {
         CreateLateral2Padres(NombrePadre);
         CreateCabera2Hijos(NombrePadre);
     }
-    public void AddMatrizSoloHijos(String Nombre){
+
+    public void AddMatrizSoloHijos(String Nombre) {
         CreateLateral2Padres(Nombre);
     }
 
@@ -73,96 +74,98 @@ public class Matrix {
     public String DotMatrix(String Dot) {
         NodeMatrix Temp = getHeadNode().getRightNode();
         NodeMatrix Temp2 = getHeadNode().getDownNode();
-        Dot += "digraph Sparse_Matrix{\n";
-        Dot += "node [shape=box]\n";
-        Dot += "graph[nodesep = 0.5];\n";
-        Dot += "Terminal [ label = \"Matrix\", width = 1.5, style = filled, group = 0 ];\n";
-        Dot += "e0[ shape = point, width = 0 ]\n";
-        Dot += "e1[ shape = point, width = 0 ]\n";
-        Dot += "Terminal -> Y" + String.valueOf(Temp2.getNombrePadre()) + " [dir=both];\n";
-        while (Temp2.getDownNode() != null) {
-            Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "[label = \"" + String.valueOf(Temp2.getNombrePadre()) + " \" , group ="
-                    + String.valueOf(0) + "];\n";
-            Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "-> Y" + String.valueOf(Temp2.getDownNode().getNombrePadre()) + "[dir=both];\n";
-            NodeMatrix Aux2 = Temp2;
-            while (Aux2.getRightNode() != null) {
-                if (Aux2.getNombreHijo().equalsIgnoreCase("")) {
-                    Dot += "Y" + String.valueOf(Aux2.getNombrePadre()) + "-> n" + String.valueOf(Aux2.getRightNode().getNombreHijo()) + "_"
-                            + String.valueOf(Aux2.getRightNode().getNombrePadre()) + "[dir=both];\n";
-                    Dot += "{ rank = same; Y" + String.valueOf(Temp2.getNombrePadre()) + "; n" + String.valueOf(Aux2.getRightNode().getNombreHijo())
-                            + "_" + String.valueOf(Aux2.getRightNode().getNombrePadre()) + " }\n";
-                } else {
-                    Dot += "n" + String.valueOf(Aux2.getNombreHijo()) + "_" + String.valueOf(Aux2.getNombrePadre()) + "-> n"
-                            + String.valueOf(Aux2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Aux2.getRightNode().getNombrePadre())
-                            + "[dir=both];\n";
-                    Dot += "{ rank = same; n" + String.valueOf(Aux2.getNombreHijo()) + "_" + String.valueOf(Aux2.getNombrePadre()) + "; n"
-                            + String.valueOf(Aux2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Aux2.getRightNode().getNombrePadre()) + " }\n";
-                }
-                Aux2 = Aux2.getRightNode();
-            }
-            Temp2 = Temp2.getDownNode();
-        }
-        Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "[label = \"" + String.valueOf(Temp2.getNombrePadre()) + " \" ,group =X" + String.valueOf(0)
-                + "];\n";
-        while (Temp2.getRightNode() != null) {
-            if (Temp2.getNombreHijo().equalsIgnoreCase("")) {
-                Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "-> n" + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_"
-                        + String.valueOf(Temp2.getNombrePadre()) + "[dir=both];\n";
-                Dot += "{ rank = same; Y" + String.valueOf(Temp2.getNombrePadre()) + "; n" + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_"
-                        + String.valueOf(Temp2.getNombrePadre()) + " }\n";
 
-            } else {
-                Dot += "n" + String.valueOf(Temp2.getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + "-> n"
-                        + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + "[dir=both];\n";
-                Dot += "{ rank = same; n" + String.valueOf(Temp2.getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + "; n"
-                        + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + " }\n";
-
-            }
-            Temp2 = Temp2.getRightNode();
-        }
-        Dot += "Terminal -> X" + String.valueOf(Temp.getNombreHijo()) + " [dir=both];\n";
-        while (Temp.getRightNode() != null) {
-            Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "[label = \"" + String.valueOf(Temp.getNombreHijo()) + " \"  , group = X"
-                    + String.valueOf(Temp.getNombreHijo()) + "];\n";
-            Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "-> X" + String.valueOf(Temp.getRightNode().getNombreHijo()) + "[dir=both];\n";
-            Dot += "{ rank = same; Terminal; X" + String.valueOf(Temp.getNombreHijo()) + " }\n";
-            NodeMatrix Aux = Temp;
-            while (Aux.getDownNode() != null) {
-                Dot += "n" + String.valueOf(Aux.getNombreHijo()) + "_" + String.valueOf(Aux.getDownNode().getNombrePadre()) + "[label = \""
-                        + String.valueOf(Aux.getDownNode().getNombrePadre()) + "/" + String.valueOf(Aux.getDownNode().getNombreHijo()) + " \"   width = 1.5, group =X" + String.valueOf(Aux.getNombreHijo()) + "];\n";
-                if (Aux.getNombrePadre().equalsIgnoreCase("")) {
-                    Dot += "X" + String.valueOf(Aux.getNombreHijo()) + "->n" + String.valueOf(Aux.getNombreHijo()) + "_"
-                            + String.valueOf(Aux.getDownNode().getNombrePadre()) + "[dir=both];\n";
-                } else {
-                    Dot += "n" + String.valueOf(Aux.getNombreHijo()) + "_" + String.valueOf(Aux.getNombrePadre()) + "-> n" + String.valueOf(Aux.getNombreHijo()) + "_"
-                            + String.valueOf(Aux.getDownNode().getNombrePadre()) + "[dir=both];\n";
+        if (Temp != null && Temp2 != null) {
+            Dot += "digraph Sparse_Matrix{\n";
+            Dot += "node [shape=box]\n";
+            Dot += "graph[nodesep = 0.5];\n";
+            Dot += "Terminal [ label = \"Matrix\", width = 1.5, style = filled, group = 0 ];\n";
+            Dot += "e0[ shape = point, width = 0 ]\n";
+            Dot += "e1[ shape = point, width = 0 ]\n";
+            Dot += "Terminal -> Y" + String.valueOf(Temp2.getNombrePadre()) + " [dir=both];\n";
+            while (Temp2.getDownNode() != null) {
+                Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "[label = \"" + String.valueOf(Temp2.getNombrePadre()) + " \" , group ="
+                        + String.valueOf(0) + "];\n";
+                Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "-> Y" + String.valueOf(Temp2.getDownNode().getNombrePadre()) + "[dir=both];\n";
+                NodeMatrix Aux2 = Temp2;
+                while (Aux2.getRightNode() != null) {
+                    if (Aux2.getNombreHijo().equalsIgnoreCase("")) {
+                        Dot += "Y" + String.valueOf(Aux2.getNombrePadre()) + "-> n" + String.valueOf(Aux2.getRightNode().getNombreHijo()) + "_"
+                                + String.valueOf(Aux2.getRightNode().getNombrePadre()) + "[dir=both];\n";
+                        Dot += "{ rank = same; Y" + String.valueOf(Temp2.getNombrePadre()) + "; n" + String.valueOf(Aux2.getRightNode().getNombreHijo())
+                                + "_" + String.valueOf(Aux2.getRightNode().getNombrePadre()) + " }\n";
+                    } else {
+                        Dot += "n" + String.valueOf(Aux2.getNombreHijo()) + "_" + String.valueOf(Aux2.getNombrePadre()) + "-> n"
+                                + String.valueOf(Aux2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Aux2.getRightNode().getNombrePadre())
+                                + "[dir=both];\n";
+                        Dot += "{ rank = same; n" + String.valueOf(Aux2.getNombreHijo()) + "_" + String.valueOf(Aux2.getNombrePadre()) + "; n"
+                                + String.valueOf(Aux2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Aux2.getRightNode().getNombrePadre()) + " }\n";
+                    }
+                    Aux2 = Aux2.getRightNode();
                 }
-                Aux = Aux.getDownNode();
+                Temp2 = Temp2.getDownNode();
             }
-            Temp = Temp.getRightNode();
-        }
-        Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "[label = \"" + String.valueOf(Temp.getNombreHijo()) + " \" , group =X"
-                + String.valueOf(Temp.getNombreHijo()) + "];\n";
-        Dot += "{ rank = same; Terminal; X" + String.valueOf(Temp.getNombreHijo()) + " }\n";
-        while (Temp.getDownNode() != null) {
-            Dot += "n" + String.valueOf(Temp.getNombreHijo()) + "_" + String.valueOf(Temp.getDownNode().getNombrePadre()) + "[label = \""
-                    + String.valueOf(Temp.getDownNode().getNombrePadre()) + "/" + String.valueOf(Temp.getDownNode().getNombreHijo()) 
-                    + " \"   width = 1.5, group =X" + String.valueOf(Temp.getNombreHijo())
+            Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "[label = \"" + String.valueOf(Temp2.getNombrePadre()) + " \" ,group =X" + String.valueOf(0)
                     + "];\n";
-            if (Temp.getNombrePadre().equalsIgnoreCase("")) {
+            while (Temp2.getRightNode() != null) {
+                if (Temp2.getNombreHijo().equalsIgnoreCase("")) {
+                    Dot += "Y" + String.valueOf(Temp2.getNombrePadre()) + "-> n" + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_"
+                            + String.valueOf(Temp2.getNombrePadre()) + "[dir=both];\n";
+                    Dot += "{ rank = same; Y" + String.valueOf(Temp2.getNombrePadre()) + "; n" + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_"
+                            + String.valueOf(Temp2.getNombrePadre()) + " }\n";
 
-                Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "-> n" + String.valueOf(Temp.getNombreHijo()) + "_"
-                        + String.valueOf(Temp.getDownNode().getNombrePadre()) + "[dir=both];\n";
-            } else {
+                } else {
+                    Dot += "n" + String.valueOf(Temp2.getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + "-> n"
+                            + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + "[dir=both];\n";
+                    Dot += "{ rank = same; n" + String.valueOf(Temp2.getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + "; n"
+                            + String.valueOf(Temp2.getRightNode().getNombreHijo()) + "_" + String.valueOf(Temp2.getNombrePadre()) + " }\n";
 
-                Dot += "n" + String.valueOf(Temp.getNombreHijo()) + "_" + String.valueOf(Temp.getNombrePadre()) + "-> n" + String.valueOf(Temp.getNombreHijo()) + "_"
-                        + String.valueOf(Temp.getDownNode().getNombrePadre()) + "[dir=both];\n";
+                }
+                Temp2 = Temp2.getRightNode();
             }
-            Temp = Temp.getDownNode();
+            Dot += "Terminal -> X" + String.valueOf(Temp.getNombreHijo()) + " [dir=both];\n";
+            while (Temp.getRightNode() != null) {
+                Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "[label = \"" + String.valueOf(Temp.getNombreHijo()) + " \"  , group = X"
+                        + String.valueOf(Temp.getNombreHijo()) + "];\n";
+                Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "-> X" + String.valueOf(Temp.getRightNode().getNombreHijo()) + "[dir=both];\n";
+                Dot += "{ rank = same; Terminal; X" + String.valueOf(Temp.getNombreHijo()) + " }\n";
+                NodeMatrix Aux = Temp;
+                while (Aux.getDownNode() != null) {
+                    Dot += "n" + String.valueOf(Aux.getNombreHijo()) + "_" + String.valueOf(Aux.getDownNode().getNombrePadre()) + "[label = \""
+                            + String.valueOf(Aux.getDownNode().getNombrePadre()) + "/" + String.valueOf(Aux.getDownNode().getNombreHijo()) + " \"   width = 1.5, group =X" + String.valueOf(Aux.getNombreHijo()) + "];\n";
+                    if (Aux.getNombrePadre().equalsIgnoreCase("")) {
+                        Dot += "X" + String.valueOf(Aux.getNombreHijo()) + "->n" + String.valueOf(Aux.getNombreHijo()) + "_"
+                                + String.valueOf(Aux.getDownNode().getNombrePadre()) + "[dir=both];\n";
+                    } else {
+                        Dot += "n" + String.valueOf(Aux.getNombreHijo()) + "_" + String.valueOf(Aux.getNombrePadre()) + "-> n" + String.valueOf(Aux.getNombreHijo()) + "_"
+                                + String.valueOf(Aux.getDownNode().getNombrePadre()) + "[dir=both];\n";
+                    }
+                    Aux = Aux.getDownNode();
+                }
+                Temp = Temp.getRightNode();
+            }
+            Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "[label = \"" + String.valueOf(Temp.getNombreHijo()) + " \" , group =X"
+                    + String.valueOf(Temp.getNombreHijo()) + "];\n";
+            Dot += "{ rank = same; Terminal; X" + String.valueOf(Temp.getNombreHijo()) + " }\n";
+            while (Temp.getDownNode() != null) {
+                Dot += "n" + String.valueOf(Temp.getNombreHijo()) + "_" + String.valueOf(Temp.getDownNode().getNombrePadre()) + "[label = \""
+                        + String.valueOf(Temp.getDownNode().getNombrePadre()) + "/" + String.valueOf(Temp.getDownNode().getNombreHijo())
+                        + " \"   width = 1.5, group =X" + String.valueOf(Temp.getNombreHijo())
+                        + "];\n";
+                if (Temp.getNombrePadre().equalsIgnoreCase("")) {
 
+                    Dot += "X" + String.valueOf(Temp.getNombreHijo()) + "-> n" + String.valueOf(Temp.getNombreHijo()) + "_"
+                            + String.valueOf(Temp.getDownNode().getNombrePadre()) + "[dir=both];\n";
+                } else {
+
+                    Dot += "n" + String.valueOf(Temp.getNombreHijo()) + "_" + String.valueOf(Temp.getNombrePadre()) + "-> n" + String.valueOf(Temp.getNombreHijo()) + "_"
+                            + String.valueOf(Temp.getDownNode().getNombrePadre()) + "[dir=both];\n";
+                }
+                Temp = Temp.getDownNode();
+
+            }
         }
         Dot += "}";
-
         return Dot;
     }
 
