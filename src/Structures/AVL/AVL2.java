@@ -458,14 +458,35 @@ public class AVL2 {
 
     public boolean DescargarArchivo(String Nombre) {
         NodeAVL Temp = buscar(toAscci(Nombre), getRoot());
-        if(Temp != null){
+        if (Temp != null) {
             GruardarComo(Temp.getName(), Temp.getDescription());
-            System.out.println("Si pasa por el arbol" +Temp. getName() +" "+ Temp.getDescription());
+            System.out.println("Si pasa por el arbol" + Temp.getName() + " " + Temp.getDescription());
             return true;
-        }else{
-            System.out.println("No encontro archivo con ese nombre "+ Nombre);
+        } else {
+            System.out.println("No encontro archivo con ese nombre " + Nombre);
         }
         return false;
+    }
+
+    public boolean BuscarArchivo(String NombreArchivo) {
+        NodeAVL Temp = buscar(toAscci(NombreArchivo), getRoot());
+        if (Temp != null) {
+            return true;
+        } else {
+            System.out.println("No encontro archivo con ese nombre ");
+        }
+        return false;
+    }
+
+    public String ContenidoCompartir(String NombreArchivo) {
+        NodeAVL Temp = buscar(toAscci(NombreArchivo), getRoot());
+        if (Temp != null) {
+
+            return Temp.getDescription();
+        } else {
+            System.out.println("No encontro archivo con ese nombre ");
+        }
+        return "";
     }
 
     public void GruardarComo(String Nombre, String Descripcion) {
