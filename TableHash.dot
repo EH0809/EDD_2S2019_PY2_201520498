@@ -2,12 +2,22 @@
 nodesep=.05; 
 rankdir=LR; 
 node [shape=record,width=.1,height=.1];
-tabla [label = "<f0> | <f1> | <f2> | <f3> | <f4> | <f5> | <f6> | ",height=2.5];
+tabla [label = "<f0> | <f1> | <f2> | <f3> | <f4> | <f5> | <f6> | <f7> | <f8> | <f9> | <f10> | ",height=2.5];
 node [width = 1.5];
 
-node0[label="<n> Index: 0 | Name:popo | Password:123456789| Tiime:17-11-2019 22:21:44"];
-node4[label="<n> Index: 4 | Name:caca | Password:123456789| Tiime:17-11-2019 22:21:50"];
+node0[label="<n> Index: 0 | Name:Azucena | Password:Azu852963| Tiime:17-11-2019 23:00:59"];
+node3[label="<n> Index: 3 | Name:Sofia | Password:Sofia123| Tiime:17-11-2019 23:00:59"];
+node4[label="<n> Index: 4 | Name:Edgar852 | Password:MiContrasena| Tiime:17-11-2019 23:00:59"];
+node5[label="<n> Index: 5 | Name:Pedro456 | Password:Hola123456| Tiime:17-11-2019 23:00:59"];
+node6[label="<n> Index: 6 | Name:Maria | Password:Maria123| Tiime:17-11-2019 23:00:59"];
+node7[label="<n> Index: 7 | Name:Alejandra | Password:Alejandra123| Tiime:17-11-2019 23:00:59"];
+node9[label="<n> Index: 9 | Name:Juan123 | Password:MiContrasena123| Tiime:17-11-2019 23:00:59"];
 
 tabla:f0 -> node0:n;
+tabla:f3 -> node3:n;
 tabla:f4 -> node4:n;
+tabla:f5 -> node5:n;
+tabla:f6 -> node6:n;
+tabla:f7 -> node7:n;
+tabla:f9 -> node9:n;
 }
