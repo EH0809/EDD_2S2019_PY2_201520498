@@ -1,6 +1,6 @@
 digraph GrafoDirigido{ 
 node[shape=record]; 
-nodeCImage[label="Image"];
+nodeCDoc[label="Doc"];
 node1 [label="P"]; 
-node1 -> nodeCImage;
-}{rank=same nodel;Image;}
+node1 -> nodeCDoc;
+}{rank=same nodel;Doc;}
