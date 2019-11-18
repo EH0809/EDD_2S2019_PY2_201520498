@@ -166,6 +166,11 @@ public class MainWin extends javax.swing.JFrame {
         DeleteArchive.setText("Delete");
 
         ShareArchive.setText("Share");
+        ShareArchive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShareArchiveActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Bulk");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -293,8 +298,9 @@ public class MainWin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Server.ImprimirTodasLasCarpetas(Usuario);
+        AgraficarAVL();
         Server.InsertardesdeHash(Usuario, "Generando Imagenes");
-        // VentanaPrincipal a = new VentanaPrincipal();
+        VentanaPrincipal a = new VentanaPrincipal();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -338,10 +344,34 @@ public class MainWin extends javax.swing.JFrame {
         DescargarArchivo();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void ShareArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShareArchiveActionPerformed
+        // TODO add your handling code here:
+        CompartirArchivo();
+    }//GEN-LAST:event_ShareArchiveActionPerformed
+
+    public void CompartirArchivo() {
+        String NombreUsuario = JOptionPane.showInputDialog("Nombre Usuario");
+        String NombreCarpeta = JOptionPane.showInputDialog("Nombre del Archivo");
+        if (Server.Compartir(NombreUsuario) && Server.VerificarSiExisteArchivo(Usuario,NombreCarpeta)) {
+            String Contendio = Server.TraerContenido(Usuario, NombreCarpeta);
+            System.out.println(Contendio);
+            Server.AgregarArchivosACarpetas(NombreUsuario,"/",NombreCarpeta,Contendio);
+        }else{
+            System.out.println("No se puedo Compartir");
+        }
+
+    }
+
+    public void AgraficarAVL() {
+        String NombreCarpeta = JOptionPane.showInputDialog("Nombre de la Carpeta");
+        Server.ImprimirAVL(Usuario, NombreCarpeta);
+
+    }
+
     public void DescargarArchivo() {
         String NombreArchivo = JOptionPane.showInputDialog("Nombre del Archivo");
         String NombreCarpeta = JOptionPane.showInputDialog("Nombre de la Carpeta");
-        if (Server.DescargarArchivo(Usuario,NombreCarpeta, NombreArchivo)) {
+        if (Server.DescargarArchivo(Usuario, NombreCarpeta, NombreArchivo)) {
             System.out.println("Si se Descarga el archovp");
         } else {
             System.out.println("No se ha podido descargar el arhcivo ");
