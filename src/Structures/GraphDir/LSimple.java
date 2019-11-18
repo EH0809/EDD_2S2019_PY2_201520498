@@ -80,6 +80,22 @@ public class LSimple {
         return false;
     }
 
+    public String ArchivoCompartir(String Name) {
+        NodeLS Aux = getFirtsList();
+        if (Aux != null) {
+            while (Aux != null) {
+                if (Aux.getNameDir().equals(Name)) {
+                    return Aux.getAvlTree().ContenidoCompartir(Name);
+                }
+                Aux = Aux.getNextNode();
+            }
+        } else {
+            System.out.println("No se Encontro Dentro de la Lista de Listas");
+        }
+        return "";
+
+    }
+
     public boolean remover(String Name) {
         NodeLS retirado = null;
         NodeLS actual = getFirtsList();
