@@ -86,11 +86,15 @@ public class LLSimple {
 
     public void Imprimir() {
         NodeLLS Temp = getFirstList();
-        while (Temp != null) {
-            System.out.println("CPadre:" + Temp.getName() + " Grupo: " + Temp.getGrupo());
-            System.out.println("CHijas");
-            Temp.getPunteroLS().Imprimir();
-            Temp = Temp.getSiguienteLSS();
+        if (Temp != null) {
+            while (Temp != null) {
+                System.out.println("CPadre:" + Temp.getName() + " Grupo: " + Temp.getGrupo());
+                System.out.println("CHijas");
+                Temp.getPunteroLS().Imprimir();
+                Temp = Temp.getSiguienteLSS();
+            }
+        } else {
+            System.out.println(" No Se ha ingreado Datos");
         }
 
     }
@@ -138,6 +142,42 @@ public class LLSimple {
             System.out.println("No es el primero de la lista");
         }
         return false;
+    }
+
+    public boolean CompartirLLista(String Name) {
+        NodeLLS Temp = BuscarCabecera(Name);
+        if (Temp != null) {
+            Temp.getAvlTreeLLS().BuscarArchivo(Name);
+            return true;
+
+        } else {
+            System.out.println("No es el primero de la lista");
+        }
+        return false;
+
+    }
+
+    public boolean ComparirLSimple(String NombreArchivo) {
+        NodeLLS Temp = BuscarCarpetasHijas(NombreArchivo);
+        if (Temp != null) {
+            Temp.getPunteroLS().Buscar(NombreArchivo);
+            return true;
+
+        } else {
+            System.out.println("No es el primero de la lista");
+        }
+        return false;
+    }
+
+    public String TrerContenido(String NombreArchivo) {
+        NodeLLS Temp = BuscarCarpetasHijas(NombreArchivo);
+        if (Temp != null) {
+            return Temp.getPunteroLS().ArchivoCompartir(NombreArchivo);
+
+        } else {
+            System.out.println("No es el primero de la lista");
+        }
+        return "";
     }
 
     public boolean EliminarDentrodeCarpetas(String CarpetaPadre, String CarpetaHijo) {
@@ -199,19 +239,22 @@ public class LLSimple {
         NodeLLS Aux = getFirstList();
         int conta = 0;
         if (Aux != null) {
-            while (Aux != null) {
-                Completo += "nodeC" + Aux.getName() + "[label=\"" + Aux.getName() + "\"];\n";
-                if (conta == 0) {
-                    String a = "P";
-                    Completo += "node1 [label=\"" + a + "\"]; \n";
-                    Rank += "nodel;";
-                    conta = 1;
+            if (Aux != null) {
+                while (Aux != null) {
+                    Completo += "nodeC" + Aux.getName() + "[label=\"" + Aux.getName() + "\"];\n";
+                    if (conta == 0) {
+                        String a = "P";
+                        Completo += "node1 [label=\"" + a + "\"]; \n";
+                        Rank += "nodel;";
+                        conta = 1;
+                    }
+                    dot += "node1 -> " + "nodeC" + Aux.getName() + ";\n";
+                    Rank += Aux.getName() + ";";
+                    Completo += Aux.getPunteroLS().getDot(Aux.getName());
+                    Aux = Aux.getSiguienteLSS();
                 }
-                dot += "node1 -> " + "nodeC" + Aux.getName() + ";\n";
-                Rank += Aux.getName() + ";";
-                Completo += Aux.getPunteroLS().getDot(Aux.getName());
-                Aux = Aux.getSiguienteLSS();
             }
+
         }
         dot += "}";
         Rank += "}";
@@ -304,7 +347,7 @@ public class LLSimple {
         } else {
             NodeLLS Temp = BuscarCarpetasHijas(NombreCarpeta);
             if (Temp != null) {
-                Temp.getPunteroLS().DescargarArchivo(NombreCarpeta,Nombre);
+                Temp.getPunteroLS().DescargarArchivo(NombreCarpeta, Nombre);
                 return true;
             } else {
                 System.out.println("No se Encontro");
